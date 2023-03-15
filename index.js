@@ -18,6 +18,16 @@ async function Login(page) {
 
     return page;
 }
+
+// ABRE A ABA DE EMPRÉSTIMOS //
+async function Lending(page) {
+    await page.waitForNavigation();
+    const menu_circulation = await page.$('li.menu_circulation');
+    await menu_circulation.hover();
+    await page.waitForSelector('ul.submenu');
+    const lending_opt = await menu_circulation.$('a[href="?action=circulation_lending"]');
+    await lending_opt.click();
+}
 /*
 async function Lending(page) {
     await page.click('[href="?action=circulation_reservation"]');
