@@ -15,14 +15,20 @@ async function Login(page) {
     await page.type('[name="password"]', 'abracadabra');
     await page.focus('[name="password"]');
     await page.keyboard.press('Enter');
-    await page.waitForNavigation();
 
     return page;
 }
+/*
+async function Lending(page) {
+    await page.click('[href="?action=circulation_reservation"]');
+}
+*/
 
 (async () => {
     const page = await initBrowser()
-    await Login(page)
+    await Login(page);
+    await page.waitForNavigation();
+    await Lending(page);
 })()
 
 // chamada de função padrão //
