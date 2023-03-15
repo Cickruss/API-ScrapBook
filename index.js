@@ -6,7 +6,7 @@ async function initBrowser() {
     const context = await browser.createIncognitoBrowserContext();
     const page = await context.newPage(); //Ensures the new page is also incognito
     await page.evaluateOnNewDocument(() => { delete navigator.proto.webdriver; });
-    await page.goto('http://localhost/Biblivre5/?action=circulation_reservation'); //goes to given link
+    await page.goto('http://127.0.0.1:8080/Biblivre5/'); //goes to given link
     return page;
 }
 
@@ -30,5 +30,3 @@ async function Login(page) {
     const page = await initBrowser()
     await Login(page)
 })() */
-
-
