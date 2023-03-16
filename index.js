@@ -1,12 +1,13 @@
 const puppeteer = require('puppeteer');
+
 // INICIAR SISTEMA //
 async function initBrowser() {
 
-    const browser = await puppeteer.launch({ args: ["--incognito"], headless: false }); //Launches browser in incognito
+    const browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
     const context = await browser.createIncognitoBrowserContext();
-    const page = await context.newPage(); //Ensures the new page is also incognito
+    const page = await context.newPage();
     await page.evaluateOnNewDocument(() => { delete navigator.proto.webdriver; });
-    await page.goto('http://127.0.0.1:8080/Biblivre5/'); //goes to given link
+    await page.goto('http://127.0.0.1:8080/Biblivre5/');
     return page;
 }
 
@@ -21,25 +22,26 @@ async function Login(page) {
 ///////////////////////////////
 
 
-
 // ABRE A ABA DE EMPRÉSTIMOS //
 async function LendingPage(page) {
-    const menu_circulation = await page.$('li.menu_circulation');
-    await menu_circulation.hover();
+    const menuCirculation = await page.$('li.menu_circulation');
+    await menuCirculation.hover();
     await page.waitForSelector('ul.submenu');
-    const lending_opt = await menu_circulation.$('a[href="?action=circulation_lending"]');
-    await lending_opt.click();
+    const lendingOption = await menuCirculation.$('a[href="?action=circulation_lending"]');
+    await lendingOption.click();
 }
 async function InputNameFromCard(page) {
     const inputUser = '[placeholder="Preencha os termos da pesquisa"]';
-    await page.type(inputUser,'00002');
-    await page.focus('[placeholder="Preencha os termos da pesquisa"]');
+    let userRegistration = '00001';
+    await page.type(inputUser, userRegistration);
+    await page.focus(inputUser);
     await page.keyboard.press('Enter');
 }
 
 async function InputBookFromRfid(page) {
     const InputBook = '[placeholder="Tombo patrimonial"]';
-    await page.type(InputBook, 'Bib.2023.1');
+    let bookRegistration = 'Bib.2023.1';
+    await page.type(InputBook, bookRegistration);
     await page.focus(InputBook);
     await page.keyboard.press('Enter');
     await page.waitForTimeout(500);
