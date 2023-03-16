@@ -7,7 +7,7 @@ async function initBrowser() {
     const context = await browser.createIncognitoBrowserContext();
     const page = await context.newPage();
     await page.evaluateOnNewDocument(() => { delete navigator.proto.webdriver; });
-    await page.goto('http://127.0.0.1:8080/Biblivre5/');
+    await page.goto('http://127.0.0.1:8080/Biblivre5/'); //goes to given link
     return page;
 }
 
@@ -32,7 +32,7 @@ async function LendingPage(page) {
 }
 async function InputNameFromCard(page) {
     const inputUser = '[placeholder="Preencha os termos da pesquisa"]';
-    let userRegistration = '00001';
+    const userRegistration = '00001';
     await page.type(inputUser, userRegistration);
     await page.focus(inputUser);
     await page.keyboard.press('Enter');
@@ -45,8 +45,8 @@ async function InputBookFromRfid(page) {
     await page.focus(InputBook);
     await page.keyboard.press('Enter');
     await page.waitForTimeout(500);
-    const [lendButton] = await page.$x("//a[contains(text(), 'Emprestar')]");
-    await lendButton.click();
+    const [lendingButton] = await page.$x("//a[contains(text(), 'Emprestar')]");
+    await lendingButton.click();
 }
 
 // Tempo de desenvolvimento: 2h20 :)))
