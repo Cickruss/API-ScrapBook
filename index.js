@@ -44,12 +44,20 @@ async function InputBookFromRfid(page) {
     await page.type(InputBook, bookRegistration);
     await page.focus(InputBook);
     await page.keyboard.press('Enter');
+}
+
+async function ClickLendingButton(page) {
     await page.waitForTimeout(500);
     const [lendingButton] = await page.$x("//a[contains(text(), 'Emprestar')]");
     await lendingButton.click();
 }
+async function ClickGiveBack(page) {
+    await page.waitForTimeout(500);
+    const [lendingButton] = await page.$x("//a[contains(text(), 'Devolver')]");
+    await lendingButton.click();
+}
 
-// Tempo de desenvolvimento: 2h20 :)))
+// Tempo de desenvolvimento: 3h :)))
 ///////////////////////////////////////////
 
 
@@ -57,10 +65,23 @@ async function InputBookFromRfid(page) {
 (async () => {
     const page = await initBrowser()
     await Login(page);
+
+    // Emprestimo livro //
     await page.waitForNavigation();
     await LendingPage(page);
     await page.waitForNavigation();
     await InputNameFromCard(page);
     await InputBookFromRfid(page);
+    await ClickLendingButton(page);
+    /////////////////////
+
+    // Devolução de livro //
+    await page.waitForNavigation();
+    await LendingPage(page);
+    await page.waitForNavigation();
+    await InputNameFromCard(page);
+    await InputBookFromRfid(page);
+    await ClickGiveBack(page);
+    ///////////////////////
 })()
 /////////////////////////////////////////
