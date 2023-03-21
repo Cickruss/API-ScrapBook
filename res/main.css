@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+
+}
+
+body {
+    font-size: 100%;
+    background: #DF4041
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+.logoImageHeader {
+    width: 15em;
+    margin-top: 0.5em;
+    align-self: center;
+}
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Montserrat;
+    margin-top: 15em;
+}
+
+.textHelp {
+    font-family: Montserrat;
+    font-size: 50%;
+    color: #FACF32;
+}
+
+.nfcImage {
+    width: 40%;
+    margin-top: 5em;
+}
+
+.titleFooter {
+    display: flex;
+    justify-content: end;
+    color: rgb(255, 255, 255);
+    font-family: Montserrat;
+    font-size: small;
+    margin-top: 22em;
+    padding-bottom: 0.9em;
+    padding-right: 2em;
+}
+
+.titleCard {
+    color: white;
+    font-size: 200%;
+
+}
+
+.backgroundChange {
+    background-color: #DF4041;
+
+    transition: background-color 1s ease-in;
+
+}
+
+.backgroundChange:hover {
+    background-color: #346BC8;
+
+}
+
+
+
+
+
+
+
+
+.shake-bottom {
+    -webkit-animation: shake-bottom 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite alternate backwards;
+    animation: shake-bottom 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite alternate backwards;
+
+}
+
+@-webkit-keyframes shake-bottom {
+
+    0%,
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+    }
+
+    10% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        -webkit-transform: rotate(4deg);
+        transform: rotate(4deg);
+    }
+
+    80% {
+        -webkit-transform: rotate(-2deg);
+        transform: rotate(-2deg);
+    }
+
+    90% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+}
+
+@keyframes shake-bottom {
+
+    0%,
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+    }
+
+    10% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        -webkit-transform: rotate(4deg);
+        transform: rotate(4deg);
+    }
+
+    80% {
+        -webkit-transform: rotate(-2deg);
+        transform: rotate(-2deg);
+    }
+
+    90% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+}
