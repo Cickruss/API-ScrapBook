@@ -62,7 +62,7 @@ async function ClickGiveBack(page) {
 
 
 // FUNÇÃO PRINCIPAL //
-(async () => {
+/*(async () => {
     const page = await initBrowser()
     await Login(page);
 
@@ -83,5 +83,5 @@ async function ClickGiveBack(page) {
     await InputBookFromRfid(page);
     await ClickGiveBack(page);
     ///////////////////////
-})()
+})()*/
 /////////////////////////////////////////

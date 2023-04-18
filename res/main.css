@@ -8,7 +8,18 @@
 
 body {
     font-size: 100%;
-    background: #DF4041
+}
+.redBackground{
+    background: #DF4041;
+}
+.yellowBackground{
+    background: #FACF32;
+}
+.blueBackground{
+    background: #346BC8;
+}
+.greenBackgorund{
+    background: #369448;
 }
 
 header {
@@ -36,9 +47,46 @@ main {
     font-family: Montserrat;
     margin-top: 15em;
 }
+.yellowContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Montserrat;
+    margin-top: 5em;
+}
+.blueContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.blueMainContent{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2em;
+}
+.greenMainContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Montserrat;
+    color: white;
+}
+.loanConcluded{
+    font-size: 3em;
+}
+.dateLoad{
+    width: 665px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+h6{
+    font-size: 1.2em;
+}
 
 .textHelp {
-    font-family: Montserrat;
+    font-family: Montserrat, serif;
     font-size: 50%;
     color: #FACF32;
 }
@@ -47,22 +95,55 @@ main {
     width: 40%;
     margin-top: 5em;
 }
+.nfcImageBook{
+    margin-top: 5em;
+    fill: white;
+}
+.imageBookYellow{
+    align-self: flex-start;
+    width: 100%;
+    height: 100%;
+}
+.imageBookGreen{
+    width: 50%;
+    margin-top: 2em;
+}
 
-.titleFooter {
+.infosYellow{
+    font-family: Montserrat, serif;
+    font-size: 1.5em;
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.titleContentYellow{
+    font-weight: bolder;
+    color: #FACF32;
+}
+.infoContentYellow{
+    color: white;
+}
+.titleFooter {
     color: rgb(255, 255, 255);
-    font-family: Montserrat;
+    font-family: Montserrat, serif;
     font-size: small;
-    margin-top: 22em;
-    padding-bottom: 0.9em;
-    padding-right: 2em;
+    bottom: 10px;
+    position: fixed;
+    width: 98%;
+    text-align: right;
 }
 
 .titleCard {
     color: white;
     font-size: 200%;
-
+    font-family: Montserrat;
+}
+.titleCardYellow{
+    color: white;
+    font-family: Montserrat;
+    font-size: 150%;
+    margin-top: 4em;
 }
 
 .backgroundChange {
@@ -76,12 +157,9 @@ main {
     background-color: #346BC8;
 
 }
-
-
-
-
-
-
+.timer{
+    margin-top: 5em;
+}
 
 
 .shake-bottom {

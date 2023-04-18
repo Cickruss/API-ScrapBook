@@ -4,14 +4,14 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Arandu</title>
+    <title>Curumin</title>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="icon" href="" type="image/svg+xml">
 </head>
 
-<body class="backgroundChange">
+<body class="redBackground">
     <header>
         <svg class="logoImageHeader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             zoomAndPan="magnify" viewBox="0 0 1440 809.999993" preserveAspectRatio="xMidYMid meet" version="1.0">
@@ -23,7 +23,7 @@
                         clip-rule="nonzero" />
                 </clipPath>
                 <clipPath id="b20cc161b1">
-                    <path
+                    <path 
                         d="M 256.566406 181.621094 C 133.195312 181.621094 33.1875 281.632812 33.1875 405 C 33.1875 528.367188 133.195312 628.378906 256.566406 628.378906 C 379.933594 628.378906 479.945312 528.367188 479.945312 405 C 479.945312 281.632812 379.933594 181.621094 256.566406 181.621094 "
                         clip-rule="nonzero" />
                 </clipPath>
@@ -138,7 +138,7 @@
 
     </header>
     <main>
-        <div class="infoCard shadow-pop-tr">
+        <div id="redScreen" class="infoCard shadow-pop-tr" style="display: flex">
             <h2 class="titleCard ">Aproxime seu cartão no leitor</h2>
             <svg class="nfcImage shake-bottom" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 42 30"
                 overflow="visible" viewBox="0 0 42 30">
@@ -157,9 +157,55 @@
             </svg>
         </div>
 
+        <div id="yellowScreen" class="yellowContent" style="display: none">
+            <h2 class="titleCard">Olá, <strong style="color: #346BC8">Bruna Melido</strong>!</h2>
+            <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" class="nfcImageBook shake-bottom"
+                 viewBox="0 0 512 512"  xml:space="preserve">
+                <g>
+                <path d="M100.21,96.593c-6.838-6.864-11.017-16.18-11.026-26.63c0.009-10.45,4.189-19.766,11.026-26.63
+                    c6.874-6.847,16.189-11.027,26.64-11.036H438.96V0.009L126.849,0C88.21,0.018,56.905,31.314,56.896,69.963v372.084
+                    c0.009,38.639,31.314,69.944,69.954,69.954h328.255V107.62H126.849C116.399,107.62,107.083,103.44,100.21,96.593z M165.281,139.916
+                    h257.536v339.787H165.281V139.916z"/>
+                    <path class="st0" d="M143.749,56.125c-7.639,0-13.838,6.198-13.838,13.838S136.11,83.8,143.749,83.8h311.355V56.125H143.749z"/>
+                </g>
+            </svg>
+            <h5 class="titleCardYellow">Aproxime o livro do leitor</h5>
+        </div>
+
+        <div id="blueScreen" class="blueContent" style="display: none">
+            <div class="blueMainContent" style="display: flex; flex-direction: row">
+            <div style="width: 400px">
+                <img class="imageBookYellow" src="images/A-ilha-misteriosa.png" alt="Imagem Livro">
+            </div>
+            <div class="infosYellow" style="width: 400px; height: 250px;">
+                <label class="titleContentYellow">TITULO:</label>
+                <p class="infoContentYellow">A ILHA MISTERIOSA</p>
+                <label class="titleContentYellow">AUTOR:</label>
+                <p class="infoContentYellow">JÚLIO VERNE</p>
+                <label class="titleContentYellow">ANO DE PUBLICAÇÃO:</label>
+                <p class="infoContentYellow">1874</p>
+            </div>
+            </div>
+            <h5 class="titleCardYellow">Aproxime o livro do leitor novamente</h5>
+        </div>
+
+        <div id="greenScreen" class="greenContent" style="display: none">
+            <div class="greenMainContent">
+            <h6>Tudo pronto Bruna,</h6>
+            <h2 class="loanConcluded">EMPRÉSTIMO CONCLUÍDO!</h2>
+                <div class="dateLoad">
+                <div><p>DATA DE EMPRESTIMO: 20/04/2023</p></div>
+                <div><p>DATA DE DEVOLUÇÃO: 10/05/2023</p></div>
+                </div>
+                <img class="imageBookGreen" src="images/A-ilha-misteriosa.png" alt="Imagem Livro">
+                <h3 style="margin-top: 1em">A ILHA MISTERIOSA - JÚLIO VERNE</h3>
+                <h4 class="timer">*TIMER*</h4>
+            </div>
+        </div>
     </main>
     <footer>
         <p class="titleFooter">Todos os direitos reservados 2023© Arandu™ </p>
+
     </footer>
 </body>
 
