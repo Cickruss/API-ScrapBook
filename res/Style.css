@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: Montserrat;
+}
+.redBackground{
+    background: #DF4041;
+}
+.yellowBackground{
+    background: #FACF32;
+}
+.blueBackground{
+    background: #346BC8;
+}
+.greenBackgorund{
+    background: #369448;
+}
+
+/*Header*/
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.logoImageHeader{
+    width: 10%;
+}
+
+/* --------------------- */
+
+/* Main */
+main{
+    margin-top: 10%;
+}
+.content_main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2%;
+    gap: 2%;
+}
+.svg{
+    width:5%;
+}
+.cardReader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #D9D9D9;
+    color: #DF4041;
+    font-weight: 900;
+    font-size: 150%;
+    width: 28%;
+    border-radius: 10px;
+}
+.ouRedPage{
+    color: #ffffff;
+}
+.inputCardRfid{
+    background: #D9D9D9;
+    color: #DF4041;
+    font-size: 100%;
+    font-family: Montserrat;
+    font-weight: bolder;
+    width: 130%;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+.inputCardRfid:hover{
+    /* colocar shadow */
+}
+.titleFooter {
+    color: #ffffff;
+    font-family: Montserrat;
+    font-size: small;
+    bottom: 2%;
+    position: fixed;
+    width: 98%;
+    text-align: right;
+}
