@@ -32,7 +32,7 @@ header{
 /* --------------------- */
 
 /* Main */
-main{
+#redPage{
     margin-top: 10%;
 }
 .content_main{
@@ -132,6 +132,56 @@ main{
 .blink-2 {
     -webkit-animation: blink-2 1.5s infinite ;
     animation: blink-2 1.5s infinite ;
+}
+
+
+
+#yellowPage{
+    margin-top: 2%;
+}
+.titleContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #369448;
+    font-weight: bolder;
+}
+
+
+.tableContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4%;
+    color: white;
+
+}
+.bookTable{
+    width: 50%;
+    height: 100%;
+    border: 3px white solid;
+    background-color: #369448;
+}
+.titleTable{
+    font-size: 300%;
+}
+.dataRowTable{
+    height: 50px;
+    font-size: 110%;
+}
+.dataTable{
+    border: 1px white solid;
+}
+.titleBookTable:hover{
+    color: #b92b2b;
+    text-decoration: line-through;
+    cursor: pointer;
+}
+.svgBin{
+    float: left;
+    margin-left: -1.5em;
 }
 
 @-webkit-keyframes blink-2 {
