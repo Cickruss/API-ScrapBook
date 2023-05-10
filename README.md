@@ -76,12 +76,12 @@ PROJECT LOGO
 
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
-    Curumim é um projeto tecnológico e social para o MMIB (Movimento das Mulheres das Ilhas de Belém Ilha de Cotijuba-PA). 
-    O projeto começou a ser desenvolvido na matéria de Projeto Integrado do Cesupa (Centro Universitário do Estado do Pará), porém continuará a ser desenvolvido mesmo após o fim deste semestre. 
-    Como estudantes sabemos que a educação é o ponto de partida das transformações, e a leitura é um dos pilares fundamentais do conhecimento, abre horizontes àqueles que a praticam.
-    A sala de leitura do MMIB da Ilha de Cotijuba conta com vários livros, e quase nenhum visitante. Os livros não são catalogados de forma alguma, e os empréstimos não tem um controle.
-    A maioria dos softwares de gerenciamento de biblioteca são caros e/ou complexos, então utilizando o BIBLIVRE como plataforma para armazenar os dados dos livros, integramos a tecnologia RFID
-    a nossa aplicação para fornecer uma alternativa acessível e simples para a catalogação e empréstimo dos livros. 
+Curumim é um projeto tecnológico e social para o MMIB (Movimento das Mulheres das Ilhas de Belém Ilha de Cotijuba-PA). 
+O projeto começou a ser desenvolvido na matéria de Projeto Integrado do Cesupa (Centro Universitário do Estado do Pará), porém continuará a ser desenvolvido mesmo após o fim deste semestre. 
+Como estudantes sabemos que a educação é o ponto de partida das transformações, e a leitura é um dos pilares fundamentais do conhecimento, abre horizontes àqueles que a praticam.
+A sala de leitura do MMIB da Ilha de Cotijuba conta com vários livros, e quase nenhum visitante. Os livros não são catalogados de forma alguma, e os empréstimos não tem um controle.
+A maioria dos softwares de gerenciamento de biblioteca são caros e/ou complexos, então utilizando o BIBLIVRE como plataforma para armazenar os dados dos livros, integramos a tecnologia RFID
+a nossa aplicação para fornecer uma alternativa acessível e simples para a catalogação e empréstimo dos livros. 
 
 ```sh
     const Curumim = "Do Tupi Guarani: Um misto de sabedoria e conhecimento";
