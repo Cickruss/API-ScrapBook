@@ -44,33 +44,6 @@ PROJECT LOGO
 -->
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">Sobre o Projeto</a>
-      <ul>
-        <li><a href="#built-with">Tecnologias Utilizadas</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Iniciar</a>
-      <ul>
-        <li><a href="#installation">Instalação</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Uso</a></li>
-    <!--<li><a href="#roadmap">Roadmap</a></li>-->
-    <li><a href="#contributing">Contribuidores</a></li>
-    <!--<li><a href="#license">License</a></li>-->
-    <li><a href="#contact">Contatos</a></li>
-    <!--<li><a href="#acknowledgments">Acknowledgments</a></li>-->
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## Sobre o Projeto
 
