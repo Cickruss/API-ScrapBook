@@ -1,4 +1,4 @@
-<a name="readme-top">Curumim</a>
+# Curumim
 
 <!-- PROJECT SHIELDS -->
 <!--
