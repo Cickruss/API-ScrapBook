@@ -44,7 +44,7 @@ PROJECT LOGO
 
 ## Índice
 
-* [Sobre o Projeto](#sobre-o-projeto)
+* [Sobre Curumim](#sobre-curumim)
 * [Tecnologias Utilizadas](#tecnologias-utilizadas)
 * [Pré Requisito](#pré-requisito)
 * [Contatos](#contatos)
@@ -72,7 +72,7 @@ PROJECT LOGO
 
 
 <!-- ABOUT THE PROJECT -->
-## Sobre o Projeto
+## Sobre Curumim
 
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
