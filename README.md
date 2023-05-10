@@ -1,4 +1,3 @@
-<a name="readme-top">Curumim</a>
 
 <!-- PROJECT SHIELDS -->
 <!--
