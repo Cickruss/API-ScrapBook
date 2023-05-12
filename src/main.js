@@ -29,9 +29,8 @@ async function LendingPage(page) {
     const lendingOption = await menuCirculation.$('a[href="?action=circulation_lending"]');
     await lendingOption.click();
 }
-async function InputNameFromCard(page) {
+async function InputNameFromCard(page, idCard) {
     const inputUser = '[placeholder="Preencha os termos da pesquisa"]';
-    const idCard = '3816698861';
     await page.evaluate(async () => {
         const divNome = Array.from(document.querySelectorAll('div.combo_text')).find(div => div.textContent.trim() === 'Nome ou Matrícula');
         const divObservacoes = Array.from(document.querySelectorAll('div.combo_row')).find(div => div.textContent.trim() === 'Observações');
@@ -50,13 +49,25 @@ async function InputNameFromCard(page) {
     await page.keyboard.press('Enter');
 }
 
-async function InputBookFromRfid(page) {
+async function InputBookFromRfid(page, bookRegistration) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
-    let bookRegistration = '2786198664'; // PEGAR INPUT RFID PARAMETRO
-
     await page.type(inputBook, bookRegistration);
     await page.focus(inputBook);
     await page.keyboard.press('Enter');
+}
+
+
+async function ClickLendingButton(page) {
+    await page.waitForTimeout(500);
+    await page.evaluate(() => {
+        const buttons = document.querySelectorAll('a.button.center');
+        for (const button of buttons) {
+            if (button.textContent.trim() === 'Emprestar') {
+                button.click();
+                break;
+            }
+        }
+    });
 }
 async function ClearInput(page){
     const inputBook = '[placeholder="Tombo patrimonial"]';
@@ -106,19 +117,6 @@ async function GetBookAuthor(page) {
     return autor.substring(2,autor.length);
 }
 
-
-async function ClickLendingButton(page) {
-    await page.waitForTimeout(500);
-    await page.evaluate(() => {
-        const buttons = document.querySelectorAll('a.button.center');
-        for (const button of buttons) {
-            if (button.textContent.trim() === 'Emprestar') {
-                button.click();
-                break;
-            }
-        }
-    });
-}
 async function ClickGiveBack(page) {
     await page.waitForTimeout(500);
     await page.evaluate(() => {
@@ -143,8 +141,6 @@ function assignLetters(idCard){
     return nameForInput;
 }
 */
-
-// Tempo de desenvolvimento: 3h :)))
 ///////////////////////////////////////////
 // Cadastro de usuário -> Novo usuário
 // Esperar campo de nome ser preenchido
@@ -196,25 +192,20 @@ async function EnterUserName(page){
 
 
 async function Lending(page){
-    await page.waitForNavigation();
-    await LendingPage(page);
-    await page.waitForNavigation();
-    await InputNameFromCard(page);
-    await InputBookFromRfid(page);
     await ClickLendingButton(page);
     await ClearInput(page);
 }
 async function ReturnBook(page){
-    await page.waitForNavigation();
-    await LendingPage(page);
-    await page.waitForNavigation();
-    await InputBookFromRfid(page);
     await ClickGiveBack(page);
     await ClearInput(page)
 }
-async function GetInformationBook(page){
-    await GetBookTitle(page);
-    await GetBookAuthor(page);
+async function SearchBook(page, idCard, bookRegistration){
+    await page.waitForNavigation();
+    await InputNameFromCard(page, idCard);
+    await InputBookFromRfid(page, bookRegistration);
+    await page.waitForTimeout(500);
+    //await GetBookTitle(page);
+    //await GetBookAuthor(page);
 }
 
 // FUNÇÃO PRINCIPAL //
@@ -225,14 +216,20 @@ async function GetInformationBook(page){
     const page = await initBrowser()
     await Login(page);
 
+    //Navegar para a pagina de emprestimos
+    await page.waitForNavigation();
+    await LendingPage(page);
+    const idCard = '3816698861';
+    const bookRegistration = '2786198664';
+
     // Pegar Informações do Livro //
-    await GetInformationBook(page);
+    await SearchBook(page, idCard, bookRegistration);
 
     // Emprestimo livro //
     //await Lending(page);
 
     // Devolução de livro //
-    await ReturnBook(page);
+    //await ReturnBook(page);
 
 
     /*// Cadastro de usuários //
