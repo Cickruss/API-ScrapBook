@@ -31,7 +31,7 @@ async function LendingPage(page) {
 }
 async function InputNameFromCard(page) {
     const inputUser = '[placeholder="Preencha os termos da pesquisa"]';
-    const idCard = '1044600329';
+    const idCard = '3816698861';
     await page.evaluate(async () => {
         const divNome = Array.from(document.querySelectorAll('div.combo_text')).find(div => div.textContent.trim() === 'Nome ou Matrícula');
         const divObservacoes = Array.from(document.querySelectorAll('div.combo_row')).find(div => div.textContent.trim() === 'Observações');
@@ -44,28 +44,27 @@ async function InputNameFromCard(page) {
             }
         }
     });
-    const nameForInput = assignLetters(idCard);
-    await page.type(inputUser, nameForInput);
+    // const nameForInput = assignLetters(idCard); NAO PRECISAMOS MAIS PQ CONSEGUIMOS PELAS OBSERVAÇÕES
+    await page.type(inputUser, idCard);
     await page.focus(inputUser);
     await page.keyboard.press('Enter');
 }
 
 async function InputBookFromRfid(page) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
-    let bookRegistration = '456789'; // PEGAR INPUT RFID PARAMETRO
+    let bookRegistration = '2786198664'; // PEGAR INPUT RFID PARAMETRO
 
     await page.type(inputBook, bookRegistration);
     await page.focus(inputBook);
     await page.keyboard.press('Enter');
-    //await page.waitForTimeout(2000);
-    //  await ClickLendingButton(page);
-    //await page.waitForTimeout(2000);
+}
+async function ClearInput(page){
+    const inputBook = '[placeholder="Tombo patrimonial"]';
     await page.focus(inputBook);
     await page.keyboard.down('Control');
     await page.keyboard.press('KeyA');
     await page.keyboard.up('Control');
     await page.keyboard.press('Backspace');
-
 }
 
 async function GetBookTitle(page){
@@ -122,10 +121,16 @@ async function ClickLendingButton(page) {
 }
 async function ClickGiveBack(page) {
     await page.waitForTimeout(500);
-    const [lendingButton] = await page.$x("//a[contains(text(), 'Devolver')]");
-    await lendingButton.click();
+    await page.evaluate(() => {
+        const devolverButton = document.querySelector('div.buttons a[onclick^="HoldingSearch.returnLending"]');
+        if (devolverButton) {
+            devolverButton.click();
+        }
+    });
+
 }
 
+/*
 function assignLetters(idCard){
     let equivalentLetters = ['a', 'r', 'n', 'd','u', 't', 'e', 'c', 'h', 'g'];
     //let idCard = "1044600329";
@@ -137,6 +142,7 @@ function assignLetters(idCard){
     //console.log(nameForInput)
     return nameForInput;
 }
+*/
 
 // Tempo de desenvolvimento: 3h :)))
 ///////////////////////////////////////////
@@ -189,32 +195,44 @@ async function EnterUserName(page){
 // Tempo de desenvolvimento: 1h24min
 
 
+async function Lending(page){
+    await page.waitForNavigation();
+    await LendingPage(page);
+    await page.waitForNavigation();
+    await InputNameFromCard(page);
+    await InputBookFromRfid(page);
+    await ClickLendingButton(page);
+    await ClearInput(page);
+}
+async function ReturnBook(page){
+    await page.waitForNavigation();
+    await LendingPage(page);
+    await page.waitForNavigation();
+    await InputBookFromRfid(page);
+    await ClickGiveBack(page);
+    await ClearInput(page)
+}
+async function GetInformationBook(page){
+    await GetBookTitle(page);
+    await GetBookAuthor(page);
+}
+
 // FUNÇÃO PRINCIPAL //
 
-// A função de desenvolvimento do empréstimo de livros durou 6h15min
+// A função de desenvolvimento do empréstimo e devolução de livros durou 7h30min
+// a função de pegar informações do livro durou 1h30min
 (async () => {
     const page = await initBrowser()
     await Login(page);
 
-    // Emprestimo livro //
-    await page.waitForNavigation();
-    await LendingPage(page);
-    await page.waitForNavigation();
-    await InputNameFromCard(page);
-    await InputBookFromRfid(page);
-    await GetBookTitle(page);
-    await GetBookAuthor(page);
-    //await ClickLendingButton(page);
-    /////////////////////
+    // Pegar Informações do Livro //
+    await GetInformationBook(page);
 
-    /*// Devolução de livro //
-    await page.waitForNavigation();
-    await LendingPage(page);
-    await page.waitForNavigation();
-    await InputNameFromCard(page);
-    await InputBookFromRfid(page);
-    await ClickGiveBack(page);
-    ///////////////////////*/
+    // Emprestimo livro //
+    //await Lending(page);
+
+    // Devolução de livro //
+    await ReturnBook(page);
 
 
     /*// Cadastro de usuários //
