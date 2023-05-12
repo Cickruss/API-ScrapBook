@@ -179,9 +179,35 @@ header{
     text-decoration: line-through;
     cursor: pointer;
 }
+.checkBoxTable{
+    transform: scale(200%);
+    background:transparent;
+    border:0;}
 .svgBin{
     float: left;
     margin-left: -1.5em;
+}
+.buttomContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+}
+.buttonContinueYellowPage{
+    border: 3px solid #369448;
+    background-color: #FACF32;
+    color: #369448;
+    cursor: pointer;
+    padding: 1% 2%;
+    border-radius: 8px;
+    font-family: Montserrat;
+    font-size: 150%;
+    font-weight: bold;
+}
+.buttonContinueYellowPage:hover{
+    color: white;
+    background-color: #369448;
 }
 
 @-webkit-keyframes blink-2 {
