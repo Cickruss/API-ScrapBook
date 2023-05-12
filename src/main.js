@@ -32,6 +32,18 @@ async function LendingPage(page) {
 async function InputNameFromCard(page) {
     const inputUser = '[placeholder="Preencha os termos da pesquisa"]';
     const idCard = '1044600329';
+    await page.evaluate(async () => {
+        const divNome = Array.from(document.querySelectorAll('div.combo_text')).find(div => div.textContent.trim() === 'Nome ou Matrícula');
+        const divObservacoes = Array.from(document.querySelectorAll('div.combo_row')).find(div => div.textContent.trim() === 'Observações');
+
+        if (divNome) {
+            divNome.click();
+            await new Promise(resolve => setTimeout(resolve, 0)); // Aguarda 1 segundo (ajuste conforme necessário)
+            if (divObservacoes) {
+                divObservacoes.click();
+            }
+        }
+    });
     const nameForInput = assignLetters(idCard);
     await page.type(inputUser, nameForInput);
     await page.focus(inputUser);
@@ -40,25 +52,61 @@ async function InputNameFromCard(page) {
 
 async function InputBookFromRfid(page) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
-    let bookRegistration = ['3816698861', '1044640094'];
+    let bookRegistration = '456789'; // PEGAR INPUT RFID PARAMETRO
 
-    for (let i = 0; i < bookRegistration.length; i++) {
-        //await page.type(inputBook, '');
-        await page.type(inputBook, bookRegistration[i]);
-        await page.focus(inputBook);
-        await page.keyboard.press('Enter');
-        //await page.waitForTimeout(2000);
-        await ClickLendingButton(page);
-        //await page.waitForTimeout(2000);
-        await page.focus(inputBook);
-        await page.keyboard.down('Control');
-        await page.keyboard.press('KeyA');
-        await page.keyboard.up('Control');
-        await page.keyboard.press('Backspace');
-        //await page.waitForTimeout(5000);
-    }
+    await page.type(inputBook, bookRegistration);
+    await page.focus(inputBook);
+    await page.keyboard.press('Enter');
+    //await page.waitForTimeout(2000);
+    //  await ClickLendingButton(page);
+    //await page.waitForTimeout(2000);
+    await page.focus(inputBook);
+    await page.keyboard.down('Control');
+    await page.keyboard.press('KeyA');
+    await page.keyboard.up('Control');
+    await page.keyboard.press('Backspace');
 
 }
+
+async function GetBookTitle(page){
+    const bookTitle = await page.evaluate(() => {
+        const divRecord = document.querySelector('div.record');
+        if (divRecord) {
+            const tituloLabel = divRecord.querySelector('label');
+            if (tituloLabel && tituloLabel.textContent.trim() === 'Título') {
+                const tituloText = tituloLabel.nextSibling.textContent.trim();
+                return tituloText;
+            }
+        }
+        return null;
+    });
+    console.log(bookTitle.substring(2,bookTitle.length));
+    return bookTitle.substring(2,bookTitle.length);
+}
+
+async function GetBookAuthor(page) {
+    const autor = await page.evaluate(() => {
+        const divRecord = document.querySelector('div.record');
+        if (divRecord) {
+            const tituloLabel = divRecord.querySelector('label');
+            if (tituloLabel && tituloLabel.textContent.trim() === 'Título') {
+                const tituloText = tituloLabel.nextSibling.textContent.trim();
+                const autorLabel = Array.from(divRecord.querySelectorAll('label')).find(label => label.textContent.trim() === 'Autor');
+                if (autorLabel) {
+                    const autorElement = autorLabel.nextSibling;
+                    if (autorElement) {
+                        return autorElement.textContent.trim();
+                    }
+                }
+            }
+        }
+        return null;
+    });
+
+    console.log(autor.substring(2,autor.length));
+    return autor.substring(2,autor.length);
+}
+
 
 async function ClickLendingButton(page) {
     await page.waitForTimeout(500);
@@ -71,8 +119,6 @@ async function ClickLendingButton(page) {
             }
         }
     });
-    //const lendingButton = await page.$x("//a[contains(text(), 'Emprestar')]");
-    //await lendingButton.click();
 }
 async function ClickGiveBack(page) {
     await page.waitForTimeout(500);
@@ -88,7 +134,7 @@ function assignLetters(idCard){
     for (i = 0; i < idCardArray.length; i ++) {
         nameForInput += (equivalentLetters[idCardArray[i]]);
     }
-    console.log(nameForInput)
+    //console.log(nameForInput)
     return nameForInput;
 }
 
@@ -156,6 +202,8 @@ async function EnterUserName(page){
     await page.waitForNavigation();
     await InputNameFromCard(page);
     await InputBookFromRfid(page);
+    await GetBookTitle(page);
+    await GetBookAuthor(page);
     //await ClickLendingButton(page);
     /////////////////////
 
