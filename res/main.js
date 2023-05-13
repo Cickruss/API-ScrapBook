@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-//const Load = require('./LoanPage');
 
 // INICIAR SISTEMA //
 async function initBrowser() {
@@ -11,7 +10,6 @@ async function initBrowser() {
     await page.goto('http://127.0.0.1:8080/Biblivre5/');
     return page;
 }
-
 async function Login(page) {
     await page.type('[name="username"]', 'admin');
     await page.type('[name="password"]', 'abracadabra');
@@ -20,8 +18,6 @@ async function Login(page) {
 
     return page;
 }
-// ABRE A ABA DE EMPRÉSTIMOS //
-
 async function LendingPage(page) {
     const menuCirculation = await page.$('li.menu_circulation');
     await menuCirculation.hover();
@@ -48,7 +44,6 @@ async function InputNameFromCard(page, idCard) {
     await page.focus(inputUser);
     await page.keyboard.press('Enter');
 }
-
 async function InputBookFromRfid(page, bookRegistration) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
     await page.type(inputBook, bookRegistration);
@@ -56,8 +51,6 @@ async function InputBookFromRfid(page, bookRegistration) {
     await page.keyboard.press('Enter');
     await GetUserName(page)
 }
-
-
 async function ClickLendingButton(page) {
     await page.waitForTimeout(500);
     await page.evaluate(() => {
@@ -109,7 +102,6 @@ async function GetBookTitle(page) {
     console.log("Titulo: " + bookTitle)
     return bookTitle;
 }
-
 async function GetBookAuthor(page) {
     await page.waitForSelector('#holding_search div.record');
 
@@ -140,7 +132,6 @@ async function GetReturnDate(page) {
     console.log("Data de devolução: "+returnDate);
     return returnDate;
 }
-
 async function ClickGiveBack(page) {
     await page.waitForTimeout(500);
     await page.evaluate(() => {
@@ -192,6 +183,13 @@ async function SearchBook(page, idCard, bookRegistration){
     //await ReturnBook(page);
 
 
+
+
+
+
+
+
+
     /*// Cadastro de usuários //
     await page.waitForNavigation();
     await UserRegistration(page);
@@ -207,3 +205,42 @@ async function SearchBook(page, idCard, bookRegistration){
 
 })()
 /////////////////////////////////////////
+/*// TELA DE CADASTRO DE USUÁRIOS //
+async function UserRegistration(page){
+    const menuCirculation = await page.$('li.menu_circulation');
+    await menuCirculation.hover();
+    await page.waitForSelector('ul.submenu');
+    const lendingOption = await menuCirculation.$('a[href="?action=circulation_user"]');
+    await lendingOption.click();
+}
+
+// Função que clica no botão de Novo Usuário.
+async function ClickNewUser(page){
+    const newUserButton = ".new_record_button";
+    await page.click(newUserButton);
+}
+
+async function EnterUserName(page){
+    await page.waitForSelector('[name="name"]')
+    const usernameField = '[name="name"]';
+    //const usernameField = await page.$('input[name="name"]');
+    //await page.focus(usernameField);
+    const userName = 'Bruninha Gameplay';
+    async function EnterUserType(page) {
+        const userTypeField = '[name="type"]';
+        const type = '1';
+        await page.select(userTypeField, type);
+    }
+    async function EnterUserEmail(page) {
+        const userEmail = "porcoassado@yahoo.com";
+        const userEmailField = '[name="email"]';
+        await page.type(userEmailField, userEmail);
+    }
+    async function EnterRfidId(page) {
+    await page.type(usernameField, userName); //ao inves de nome do leitor será o nome do formulário.
+}
+    const rfidId = "3815190397";
+    const obsField = '[name="obs"]'
+    await page.type(obsField, rfidId);
+}
+// Tempo de desenvolvimento: 1h24min*/
