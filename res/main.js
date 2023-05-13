@@ -1,5 +1,29 @@
 const puppeteer = require('puppeteer');
 
+/*const redPage = document.querySelector('#redPage');
+const yellowPage = document.querySelector('#yellowPage');*/
+//let idCard, userName;
+
+// Detectando o enter
+/*
+window.onload = function() {
+    const inputUserCard = document.getElementById('inputCardRfid');
+    inputUserCard.addEventListener('keydown', function (event) {
+        if (event.code === 'Enter') {
+            idCard = inputUserCard.value;
+            console.log(idCard);
+        } else {
+            event.stopPropagation();
+        }
+        console.log('Keydown event fired'); // Verifique se o evento é disparado corretamente
+    });
+};
+
+
+*/
+
+
+
 // INICIAR SISTEMA //
 async function initBrowser() {
 
@@ -49,7 +73,7 @@ async function InputBookFromRfid(page, bookRegistration) {
     await page.type(inputBook, bookRegistration);
     await page.focus(inputBook);
     await page.keyboard.press('Enter');
-    await GetUserName(page)
+
 }
 async function ClickLendingButton(page) {
     await page.waitForTimeout(500);
@@ -71,19 +95,27 @@ async function ClearInput(page){
     await page.keyboard.up('Control');
     await page.keyboard.press('Backspace');
 }
-async function GetUserName(page){
-    let name = await page.evaluate(() => {
-        const label = document.querySelector('label');
-        if (label.textContent.trim() === 'Nome') {
-            const nameElement = label.nextSibling;
-            return nameElement.textContent.trim();
+async function GetUserName(page) {
+    await page.waitForSelector('div.record');
+
+    let userName = await page.evaluate(() => {
+        const recordDiv = document.querySelector('div.record');
+        const nameLabel = recordDiv.querySelector('label');
+        if (nameLabel && nameLabel.textContent.trim() === 'Nome') {
+            const nameText = nameLabel.nextSibling.textContent.trim();
+            return nameText;
         }
+
         return null;
     });
-    name = name.substring(2, name.length);
-    console.log("Nome: " + name);
-    return name;
+
+    if (userName) {
+        userName = userName.substring(2);
+        console.log("Nome: " + userName);
+        return userName;
+    }
 }
+
 async function GetBookTitle(page) {
     await page.waitForSelector('#holding_search div.record');
     let bookTitle = await page.evaluate(() => {
@@ -141,6 +173,7 @@ async function ClickGiveBack(page) {
         }
     });
 }
+
 async function Lending(page){
     await ClickLendingButton(page);
     await GetReturnDate(page);
@@ -150,13 +183,25 @@ async function ReturnBook(page){
     await ClickGiveBack(page);
     await ClearInput(page)
 }
-async function SearchBook(page, idCard, bookRegistration){
+async function StartConnection(){
+    const page = await initBrowser()
+    await Login(page);
+
+    await page.waitForNavigation();
+    await LendingPage(page);
+    return page;
+}
+async function SearchUser(page, idCard){
     await page.waitForNavigation();
     await InputNameFromCard(page, idCard);
+    return await GetUserName(page)
+}
+async function SearchBook(page, bookRegistration){
     await InputBookFromRfid(page, bookRegistration);
     await GetBookTitle(page);
     await GetBookAuthor(page);
 }
+
 
 // FUNÇÃO PRINCIPAL //
 
@@ -164,20 +209,17 @@ async function SearchBook(page, idCard, bookRegistration){
 // GetInfo: 3h12min.
 
 (async () => {
-    const page = await initBrowser()
-    await Login(page);
 
-    //Navegar para a pagina de emprestimos
-    await page.waitForNavigation();
-    await LendingPage(page);
-    const idCard = '3816698861';
-    const bookRegistration = '2786198664';
+    const page = await StartConnection();
+    const idCard = '1044600329';
+    const bookRegistration = '2786460808';
 
+    await SearchUser(page, idCard);
     // Pegar Informações do Livro //
-    await SearchBook(page, idCard, bookRegistration);
+    await SearchBook(page,bookRegistration);
 
     // Emprestimo livro //
-    await Lending(page);
+    //await Lending(page);
 
     // Devolução de livro //
     //await ReturnBook(page);
@@ -197,12 +239,18 @@ async function SearchBook(page, idCard, bookRegistration){
 
 })()
 
-    const inputUserCard = document.getElementById('inputCardRfid');
-inputUserCard.addEventListener('keydown', function (event) {
-    if (event.keyCode === 13){
 
-    }
-});
+
+
+
+
+
+
+
+
+
+
+
 
 
 
