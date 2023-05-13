@@ -2,11 +2,12 @@
 <html lang="pt-br">
 <link rel="stylesheet" href="Style.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<script src="main.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Curumim</title>
 </head>
-<body class="yellowBackground">
+<body class="redBackground">
 <header>
     <svg class="logoImageHeader"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
          zoomAndPan="magnify" viewBox="0 0 1440 809.999993" preserveAspectRatio="xMidYMid meet" version="1.0">
@@ -131,7 +132,7 @@
         </g>
     </svg>
 </header>
-<main id="redPage" style="display: none;">
+<main id="redPage">
     <div id="first_content_main" class="content_main ">
         <div class="firstCardReader">
             <div class="svg rfid blink-2">
@@ -139,16 +140,11 @@
             </div>
             <p>APROXIME SEU CARTÃO DO LEITOR</p></div>
     </div>
-    <div id="second_content_main" class="content_main"><h2 class="ouRedPage">OU</h2></div>
-    <div id="third_content_main" class="content_main">
-        <div class="thirdCardReader">
-            <input autofocus maxlength="30" type="text" class="inputCardRfid" placeholder="PESQUISE PELO SEU NOME..." name="IdUser">
-        </div>
-        <div class="svg person">
-            <svg onclick="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 12q-1.65 0-2.825-1.175T7 8q0-1.65 1.175-2.825T11 4q1.65 0 2.825 1.175T15 8q0 1.65-1.175 2.825T11 12Zm11.1 11.5l-3.2-3.2q-.525.3-1.125.5T16.5 21q-1.875 0-3.187-1.313T12 16.5q0-1.875 1.313-3.188T16.5 12q1.875 0 3.188 1.313T21 16.5q0 .675-.2 1.275t-.5 1.125l3.2 3.2l-1.4 1.4ZM16.5 19q1.05 0 1.775-.725T19 16.5q0-1.05-.725-1.775T16.5 14q-1.05 0-1.775.725T14 16.5q0 1.05.725 1.775T16.5 19Zm-5.475-6q-1.05 1.55-1.05 3.5t1.05 3.5H3v-2.775q0-.85.425-1.575t1.175-1.1q1.275-.65 2.875-1.1t3.55-.45Z"/></svg></div>
+    <div id="second_content_main">
+        <input autofocus type="text" id="inputCardRfid">
     </div>
 </main>
-<main id="yellowPage">
+<main id="yellowPage" style="display: none">
     <div class="titleContent">
         <div><h1>Olá </h1></div>
         <div style="margin-top: 1%;"><h1>APROXIME O LIVRO DO LEITOR</h1></div>
