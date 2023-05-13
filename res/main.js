@@ -54,6 +54,7 @@ async function InputBookFromRfid(page, bookRegistration) {
     await page.type(inputBook, bookRegistration);
     await page.focus(inputBook);
     await page.keyboard.press('Enter');
+    await GetUserName(page)
 }
 
 
@@ -77,44 +78,67 @@ async function ClearInput(page){
     await page.keyboard.up('Control');
     await page.keyboard.press('Backspace');
 }
-
-async function GetBookTitle(page){
-    const bookTitle = await page.evaluate(() => {
-        const divRecord = document.querySelector('div.record');
-        if (divRecord) {
-            const tituloLabel = divRecord.querySelector('label');
-            if (tituloLabel && tituloLabel.textContent.trim() === 'Título') {
-                const tituloText = tituloLabel.nextSibling.textContent.trim();
-                return tituloText;
-            }
+async function GetUserName(page){
+    let name = await page.evaluate(() => {
+        const label = document.querySelector('label');
+        if (label.textContent.trim() === 'Nome') {
+            const nameElement = label.nextSibling;
+            return nameElement.textContent.trim();
         }
         return null;
     });
-    console.log(bookTitle.substring(2,bookTitle.length));
-    return bookTitle.substring(2,bookTitle.length);
+    name = name.substring(2, name.length);
+    console.log("Nome: " + name);
+    return name;
+}
+async function GetBookTitle(page) {
+    await page.waitForSelector('#holding_search div.record');
+    let bookTitle = await page.evaluate(() => {
+        const holdingSearchDiv = document.querySelector('#holding_search');
+        const recordDiv = holdingSearchDiv.querySelector('div.record');
+        const titleLabel = recordDiv.querySelector('label');
+
+        if (titleLabel && titleLabel.textContent.trim() === 'Título') {
+            const titleText = titleLabel.nextSibling.textContent.trim();
+            return titleText;
+        }
+
+        return null;
+    });
+    bookTitle = bookTitle.substring(2);
+    console.log("Titulo: " + bookTitle)
+    return bookTitle;
 }
 
 async function GetBookAuthor(page) {
-    const autor = await page.evaluate(() => {
-        const divRecord = document.querySelector('div.record');
-        if (divRecord) {
-            const tituloLabel = divRecord.querySelector('label');
-            if (tituloLabel && tituloLabel.textContent.trim() === 'Título') {
-                const tituloText = tituloLabel.nextSibling.textContent.trim();
-                const autorLabel = Array.from(divRecord.querySelectorAll('label')).find(label => label.textContent.trim() === 'Autor');
-                if (autorLabel) {
-                    const autorElement = autorLabel.nextSibling;
-                    if (autorElement) {
-                        return autorElement.textContent.trim();
-                    }
-                }
-            }
+    await page.waitForSelector('#holding_search div.record');
+
+    let bookAuthor = await page.evaluate(() => {
+        const holdingSearchDiv = document.querySelector('#holding_search');
+        const recordDiv = holdingSearchDiv.querySelector('div.record');
+        const authorLabel = recordDiv.querySelector('label:nth-of-type(2)');
+        const authorText = authorLabel.nextSibling.textContent.trim();
+
+        return authorText;
+    });
+    bookAuthor = bookAuthor.substring(2);
+    console.log("Autor: "+bookAuthor);
+    return bookAuthor;
+}
+async function GetReturnDate(page) {
+    await page.waitForSelector('.result.user_lending');
+    let returnDate = await page.evaluate(() => {
+        const lendingDiv = document.querySelector('.result.user_lending');
+        const lendingDateLabel = Array.from(lendingDiv.querySelectorAll('label')).find(label => label.textContent.trim() === 'Data prevista para devolução');
+        if (lendingDateLabel) {
+            const returnDateText = lendingDateLabel.nextSibling.textContent.trim();
+            return returnDateText;
         }
         return null;
     });
-
-    console.log(autor.substring(2,autor.length));
-    return autor.substring(2,autor.length);
+    returnDate = returnDate.substring(2);
+    console.log("Data de devolução: "+returnDate);
+    return returnDate;
 }
 
 async function ClickGiveBack(page) {
@@ -125,74 +149,10 @@ async function ClickGiveBack(page) {
             devolverButton.click();
         }
     });
-
 }
-
-/*
-function assignLetters(idCard){
-    let equivalentLetters = ['a', 'r', 'n', 'd','u', 't', 'e', 'c', 'h', 'g'];
-    //let idCard = "1044600329";
-    let idCardArray = idCard.split('');
-    let nameForInput = '';
-    for (i = 0; i < idCardArray.length; i ++) {
-        nameForInput += (equivalentLetters[idCardArray[i]]);
-    }
-    //console.log(nameForInput)
-    return nameForInput;
-}
-*/
-///////////////////////////////////////////
-// Cadastro de usuário -> Novo usuário
-// Esperar campo de nome ser preenchido
-// Conferir se o campo de nome está preenchido
-// Se sim, passar para o campo de telefone ou outra coisa
-// Confirmar se o campo de nome está vazio, se sim -> esperar que seja diferente de "" (o admin passar o cartão)
-// Cadastrar depois disso
-
-
-// TELA DE CADASTRO DE USUÁRIOS //
-async function UserRegistration(page){
-    const menuCirculation = await page.$('li.menu_circulation');
-    await menuCirculation.hover();
-    await page.waitForSelector('ul.submenu');
-    const lendingOption = await menuCirculation.$('a[href="?action=circulation_user"]');
-    await lendingOption.click();
-}
-
-// Função que clica no botão de Novo Usuário.
-async function ClickNewUser(page){
-    const newUserButton = ".new_record_button";
-    await page.click(newUserButton);
-}
-
-async function EnterUserName(page){
-    await page.waitForSelector('[name="name"]')
-    const usernameField = '[name="name"]';
-    //const usernameField = await page.$('input[name="name"]');
-    //await page.focus(usernameField);
-    const userName = 'Bruninha Gameplay';
-    async function EnterUserType(page) {
-        const userTypeField = '[name="type"]';
-        const type = '1';
-        await page.select(userTypeField, type);
-    }
-    async function EnterUserEmail(page) {
-        const userEmail = "porcoassado@yahoo.com";
-        const userEmailField = '[name="email"]';
-        await page.type(userEmailField, userEmail);
-    }
-    async function EnterRfidId(page) {
-    await page.type(usernameField, userName); //ao inves de nome do leitor será o nome do formulário.
-}
-    const rfidId = "3815190397";
-    const obsField = '[name="obs"]'
-    await page.type(obsField, rfidId);
-}
-// Tempo de desenvolvimento: 1h24min
-
-
 async function Lending(page){
     await ClickLendingButton(page);
+    await GetReturnDate(page);
     await ClearInput(page);
 }
 async function ReturnBook(page){
@@ -203,15 +163,15 @@ async function SearchBook(page, idCard, bookRegistration){
     await page.waitForNavigation();
     await InputNameFromCard(page, idCard);
     await InputBookFromRfid(page, bookRegistration);
-    await page.waitForTimeout(500);
-    //await GetBookTitle(page);
-    //await GetBookAuthor(page);
+    await GetBookTitle(page);
+    await GetBookAuthor(page);
 }
 
 // FUNÇÃO PRINCIPAL //
 
-// A função de desenvolvimento do empréstimo e devolução de livros durou 7h30min
-// a função de pegar informações do livro durou 1h30min
+// LendingAndReturn: 7h30min.
+// GetInfo: 3h12min.
+
 (async () => {
     const page = await initBrowser()
     await Login(page);
@@ -226,7 +186,7 @@ async function SearchBook(page, idCard, bookRegistration){
     await SearchBook(page, idCard, bookRegistration);
 
     // Emprestimo livro //
-    //await Lending(page);
+    await Lending(page);
 
     // Devolução de livro //
     //await ReturnBook(page);
@@ -241,7 +201,7 @@ async function SearchBook(page, idCard, bookRegistration){
     await EnterUserName(page);
     await EnterUserType(page);
     await EnterUserEmail(page);
-    await EnterRfidId(page);*!/*/
+    await EnterRfidId(page);*/
 
 
 
