@@ -33,7 +33,7 @@ header{
 
 /* Main */
 #redPage{
-    margin-top: 10%;
+    margin-top: 15%;
 }
 .content_main{
     display: flex;
@@ -64,6 +64,13 @@ header{
     padding: 1% 0%;
     width: 15%;
     padding-right: 2%;
+}
+#second_content_main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
 }
 .ouRedPage{
     color: #ffffff;

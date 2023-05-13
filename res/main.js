@@ -182,14 +182,6 @@ async function SearchBook(page, idCard, bookRegistration){
     // Devolução de livro //
     //await ReturnBook(page);
 
-
-
-
-
-
-
-
-
     /*// Cadastro de usuários //
     await page.waitForNavigation();
     await UserRegistration(page);
@@ -204,6 +196,31 @@ async function SearchBook(page, idCard, bookRegistration){
 
 
 })()
+
+    const inputUserCard = document.getElementById('inputCardRfid');
+inputUserCard.addEventListener('keydown', function (event) {
+    if (event.keyCode === 13){
+
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /////////////////////////////////////////
 /*// TELA DE CADASTRO DE USUÁRIOS //
 async function UserRegistration(page){
