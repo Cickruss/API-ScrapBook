@@ -33,7 +33,7 @@ header{
 
 /* Main */
 #redPage{
-    margin-top: 15%;
+    margin-top: 25%;
 }
 .content_main{
     display: flex;
@@ -61,7 +61,7 @@ header{
     fill: #DF4041;
 }
 .rfid{
-    padding: 1% 0%;
+    padding: 5% 5%;
     width: 15%;
     padding-right: 2%;
 }
