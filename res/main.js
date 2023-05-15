@@ -1,9 +1,7 @@
-const redPage = document.querySelector('main[id="redPage"]');
-const yellowPage = document.querySelector('main[id="yellowPage"]');
+const redPage = document.querySelector('section[id="redPage"]');
+const yellowPage = document.querySelector('section[id="yellowPage"]');
 
-    function ToYellowPage() {
-        redPage.style.display = "none";
-        yellowPage.style.display = "block";
-    }
-
-    // Outro cód
+function ToYellowPage() {
+    redPage.style.display = "none";
+    yellowPage.style.display = "block";
+}
