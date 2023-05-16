@@ -2,14 +2,37 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 
 const app = express();
+//const idCard = document.querySelector('#input').value;
+const bookRegistration = '2786460808';
+//const idCard = '1044600329';
+
+
 
 app.get('/open-biblivre', async (req, res) => {
+    document.getElementById('saveButton').addEventListener('click', () => {
+        const userId = document.getElementById('userIdInput').value;
+        const bookId = document.getElementById('bookIdInput').value;
+
+        const data = {
+            userId: userId,
+            bookId: bookId,
+        };
+
+        const jsonData = JSON.stringify(data);
+
+        // ... Resto do código para escrever o objeto JSON em um arquivo ou fazer o que for necessário com ele
+    });
+
     try {
         const browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
         const context = await browser.createIncognitoBrowserContext();
         const page = await context.newPage();
         await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
         await page.goto('http://127.0.0.1:8080/Biblivre5/');
+        await Login(page);
+        await page.waitForNavigation();
+        await LendingPage(page);
+        await SearchUser(page, idCard);
         res.sendStatus(200);
     } catch (error) {
         console.error(error);
@@ -68,15 +91,15 @@ function initBrowser() {
     return page;
 }
 
-
-async function Login(page) {
+*/
+async function  Login(page) {
     await page.type('[name="username"]', 'admin');
     await page.type('[name="password"]', 'abracadabra');
     await page.focus('[name="password"]');
     await page.keyboard.press('Enter');
-
     return page;
 }
+
 async function LendingPage(page) {
     const menuCirculation = await page.$('li.menu_circulation');
     await menuCirculation.hover();
@@ -242,6 +265,7 @@ async function SearchBook(page, bookRegistration){
 // LendingAndReturn: 7h30min.
 // GetInfo: 3h12min.
 
+/*
 (async () => {
 
     const page = await StartConnection();
@@ -259,7 +283,7 @@ async function SearchBook(page, bookRegistration){
 
     // Devolução de livro //
     //await ReturnBook(page);
-
+})
     /* Cadastro de usuários //
     await page.waitForNavigation();
     await UserRegistration(page);
@@ -270,8 +294,8 @@ async function SearchBook(page, bookRegistration){
     await EnterUserType(page);
     await EnterUserEmail(page);
     await EnterRfidId(page);
-})()
-*/
+})() }
+
 
 
 
