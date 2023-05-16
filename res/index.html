@@ -160,6 +160,30 @@
 <footer><p class="titleFooter">Todos os direitos reservados 2023© Arandu™ </p></footer>
 </body>
 <script src="main.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comunicação com o Biblivre</title>
+</head>
+<body>
+<button id="openBiblivreButton">Abrir Biblivre</button>
+
+
 <script>
+    document.getElementById('openBiblivreButton').addEventListener('click', async () => {
+        const response = await fetch('http://localhost:3000/open-biblivre', {
+            method: 'GET'
+        });
+
+        if (response.ok) {
+            console.log('Biblivre aberto com sucesso!');
+        } else {
+            console.error('Erro ao abrir o Biblivre.');
+        }
+    });
+
 </script>
+</body>
+</html>
+
 </html>

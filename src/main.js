@@ -1,33 +1,7 @@
 const puppeteer = require('puppeteer');
 const express = require('express');
 
-/*const redPage = document.querySelector('#redPage');
-const yellowPage = document.querySelector('#yellowPage');*/
-//let idCard, userName;
-
-// Detectando o enter
-
-
-
-
-
 const app = express();
-const openBiblivreButton = document.getElementById('openBiblivreButton');
-openBiblivreButton.addEventListener('click', async () => {
-    try {
-        // Execute a requisição HTTP para a rota '/open-biblivre'
-
-
-        const response = await fetch('http://localhost:3000/open-biblivre');
-        if (response.ok) {
-            console.log('Biblivre aberto com sucesso!');
-        } else {
-            console.error('Erro ao abrir o Biblivre.');
-        }
-    } catch (error) {
-        console.error(error);
-    }
-});
 
 app.get('/open-biblivre', async (req, res) => {
     try {
@@ -37,46 +11,50 @@ app.get('/open-biblivre', async (req, res) => {
         await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
         await page.goto('http://127.0.0.1:8080/Biblivre5/');
         // Aqui você pode adicionar mais lógica para interagir com a página do Biblivre, se necessário
-        res.send('Biblivre aberto com sucesso!');
+        res.sendStatus(200);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Erro ao abrir o Biblivre.');
+        res.sendStatus(500);
     }
 });
+
+app.use(express.static('C:\\Users\\Isadora\\IdeaProjects\\Curumim\\res\\index.html')); // Serve o arquivo HTML estático
+
 
 app.listen(3000, () => {
     console.log('Servidor iniciado na porta 3000');
 });
 
 
-  /*  const openBiblivreButton = document.getElementById('openBiblivreButton');
-    openBiblivreButton.addEventListener('click', async () => {
-        try {
-            const page = await initBrowser();
-            alert("Catato")
-            // Aqui você pode adicionar mais lógica para interagir com a página do Biblivre, se necessário
-        } catch (error) {
-            console.error(error);
-        }
-    });
 
+/*  const openBiblivreButton = document.getElementById('openBiblivreButton');
+  openBiblivreButton.addEventListener('click', async () => {
+      try {
+          const page = await initBrowser();
+          alert("Catato")
+          // Aqui você pode adicionar mais lógica para interagir com a página do Biblivre, se necessário
+      } catch (error) {
+          console.error(error);
+      }
+  });*/
 
+/*
 // Função para abrir o Biblivre usando o Puppeteer
 function initBrowser() {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
-            const context = await browser.createIncognitoBrowserContext();
-            const page = await context.newPage();
-            await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
-            await page.goto('http://127.0.0.1:8080/Biblivre5/');
-            resolve(page);
-        } catch (error) {
-            reject(error);
-        }
-    });
-}*/
-
+  return new Promise(async (resolve, reject) => {
+      try {
+          const browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
+          const context = await browser.createIncognitoBrowserContext();
+          const page = await context.newPage();
+          await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
+          await page.goto('http://127.0.0.1:8080/Biblivre5/');
+          resolve(page);
+      } catch (error) {
+          reject(error);
+      }
+  });
+}
+*/
 
 
 // INICIAR SISTEMA //
@@ -89,7 +67,7 @@ function initBrowser() {
     await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
     await page.goto('http://127.0.0.1:8080/Biblivre5/');
     return page;
-}*/
+}
 
 
 async function Login(page) {
@@ -270,12 +248,12 @@ async function SearchBook(page, bookRegistration){
     const page = await StartConnection();
     const idCard = '1044600329';
     const bookRegistration = '2786460808';
-
+    await initBrowser(page);
     // Pegar informações do usuário //
-    await SearchUser(page, idCard);
+   // await SearchUser(page, idCard);
 
     // Pegar Informações do Livro //
-    await SearchBook(page,bookRegistration);
+    //await SearchBook(page,bookRegistration);
 
     // Emprestimo livro //
     //await Lending(page);
@@ -283,7 +261,7 @@ async function SearchBook(page, bookRegistration){
     // Devolução de livro //
     //await ReturnBook(page);
 
-    /*// Cadastro de usuários //
+    /* Cadastro de usuários //
     await page.waitForNavigation();
     await UserRegistration(page);
     await page.waitForNavigation();
@@ -292,11 +270,9 @@ async function SearchBook(page, bookRegistration){
     await EnterUserName(page);
     await EnterUserType(page);
     await EnterUserEmail(page);
-    await EnterRfidId(page);*/
-
-
-
+    await EnterRfidId(page);
 })()
+*/
 
 
 
