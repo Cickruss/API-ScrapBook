@@ -10,7 +10,6 @@ app.get('/open-biblivre', async (req, res) => {
         const page = await context.newPage();
         await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
         await page.goto('http://127.0.0.1:8080/Biblivre5/');
-        // Aqui você pode adicionar mais lógica para interagir com a página do Biblivre, se necessário
         res.sendStatus(200);
     } catch (error) {
         console.error(error);
