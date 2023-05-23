@@ -1,29 +1,30 @@
 const puppeteer = require('puppeteer');
 const express = require('express');
-
+import('node-fetch');
 const app = express();
-//const idCard = document.querySelector('#input').value;
-const bookRegistration = '2786460808';
-//const idCard = '1044600329';
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+app.post('/open-biblivre', (req, res) => {
+    const { idCard } = req.body;
+    req.app.locals.idCard = idCard;
+
+    console.log('ID do cartão fora da função:', idCard);
+    console.log("EXECUTOU APP POST\n -----------------");
+    res.sendStatus(200);
+});
 
 app.get('/open-biblivre', async (req, res) => {
-    document.getElementById('saveButton').addEventListener('click', () => {
-        const userId = document.getElementById('userIdInput').value;
-        const bookId = document.getElementById('bookIdInput').value;
-
-        const data = {
-            userId: userId,
-            bookId: bookId,
-        };
-
-        const jsonData = JSON.stringify(data);
-
-        // ... Resto do código para escrever o objeto JSON em um arquivo ou fazer o que for necessário com ele
-    });
-
     try {
+        console.log("EXECUTOU APP GET\n -----------------");
         const browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
         const context = await browser.createIncognitoBrowserContext();
         const page = await context.newPage();
@@ -32,7 +33,11 @@ app.get('/open-biblivre', async (req, res) => {
         await Login(page);
         await page.waitForNavigation();
         await LendingPage(page);
-        await SearchUser(page, idCard);
+        await page.waitForNavigation();
+        const idCard = req.app.locals.idCard;
+        await InputNameFromCard(page, idCard);
+        const userName = await GetUserName(page);
+        await postUsernameClient(idCard, userName);
         res.sendStatus(200);
     } catch (error) {
         console.error(error);
@@ -40,28 +45,46 @@ app.get('/open-biblivre', async (req, res) => {
     }
 });
 
-app.use(express.static('C:\\Users\\Isadora\\IdeaProjects\\Curumim\\res\\index.html')); // Serve o arquivo HTML estático
 
 
-app.listen(3000, () => {
-    console.log('Servidor iniciado na porta 3000');
+app.listen(4000, () => {
+    console.log('Servidor iniciado na porta 4000');
 });
 
 
+function postUsernameClient(idCard, userName){
+    console.log(userName, " no post");
+    const data = {
+        idCard: idCard,
+        userName: userName,
+        bookId: null,
+        bookName: null,
+        bookAuthor: null
+    };
+    console.log("Nome do usuário enviado de volta.");
+    fetch('http://localhost:63342', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => {
+            console.log('Requisição enviada com sucesso');
+            // Lógica adicional após a resposta do cliente
+        })
+        .catch(error => {
+            console.error('Erro ao enviar a requisição', error);
+            // Lógica adicional para lidar com erros
+        });
+}
 
-/*  const openBiblivreButton = document.getElementById('openBiblivreButton');
-  openBiblivreButton.addEventListener('click', async () => {
-      try {
-          const page = await initBrowser();
-          alert("Catato")
-          // Aqui você pode adicionar mais lógica para interagir com a página do Biblivre, se necessário
-      } catch (error) {
-          console.error(error);
-      }
-  });*/
 
-/*
+
+
+
 // Função para abrir o Biblivre usando o Puppeteer
+/*
 function initBrowser() {
   return new Promise(async (resolve, reject) => {
       try {
@@ -75,13 +98,13 @@ function initBrowser() {
           reject(error);
       }
   });
-}
-*/
+}*/
+
 
 
 // INICIAR SISTEMA //
-
-/*async function initBrowser() {
+/*
+async function initBrowser() {
 
     const browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
     const context = await browser.createIncognitoBrowserContext();
@@ -90,8 +113,8 @@ function initBrowser() {
     await page.goto('http://127.0.0.1:8080/Biblivre5/');
     return page;
 }
-
 */
+
 async function  Login(page) {
     await page.type('[name="username"]', 'admin');
     await page.type('[name="password"]', 'abracadabra');
@@ -109,7 +132,8 @@ async function LendingPage(page) {
 }
 async function InputNameFromCard(page, idCard) {
     const inputUser = '[placeholder="Preencha os termos da pesquisa"]';
-    await page.evaluate(async () => {
+
+    await page.evaluate(async (idCard) => {
         const divNome = Array.from(document.querySelectorAll('div.combo_text')).find(div => div.textContent.trim() === 'Nome ou Matrícula');
         const divObservacoes = Array.from(document.querySelectorAll('div.combo_row')).find(div => div.textContent.trim() === 'Observações');
 
@@ -120,12 +144,15 @@ async function InputNameFromCard(page, idCard) {
                 divObservacoes.click();
             }
         }
-    });
-    // const nameForInput = assignLetters(idCard); NAO PRECISAMOS MAIS PQ CONSEGUIMOS PELAS OBSERVAÇÕES
-    await page.type(inputUser, idCard);
+        const inputElement = document.querySelector('[placeholder="Preencha os termos da pesquisa"]');
+        inputElement.value = idCard;
+    }, idCard);
+
     await page.focus(inputUser);
+   // await page.type(inputUser, String(idCard));
     await page.keyboard.press('Enter');
 }
+
 async function InputBookFromRfid(page, bookRegistration) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
     await page.type(inputBook, bookRegistration);

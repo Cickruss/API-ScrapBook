@@ -9,6 +9,7 @@ body{
     background: #DF4041;
 }
 .yellowBackground{
+    height: 100vh;
     background: #FACF32;
 }
 .blueBackground{
@@ -161,7 +162,7 @@ header{
     align-items: center;
     margin-top: 3%;
 }
-.buttonContinueYellowPage{
+.buttonLendBook{
     border: 3px solid #369448;
     background-color: #FACF32;
     color: #369448;
@@ -172,10 +173,27 @@ header{
     font-size: 150%;
     font-weight: bold;
 }
-.buttonContinueYellowPage:hover{
+.buttonLendBook:hover{
     color: white;
     background-color: #369448;
 }
+
+.buttonReturnBook{
+    border: 3px solid #369448;
+    background-color: #FACF32;
+    color: #369448;
+    cursor: pointer;
+    padding: 1% 2%;
+    border-radius: 8px;
+    font-family: Montserrat;
+    font-size: 150%;
+    font-weight: bold;
+}
+.buttonReturnBook:hover{
+    color: white;
+    background-color: #369448;
+}
+
 
 @-webkit-keyframes blink-2 {
     0% {

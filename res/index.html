@@ -144,11 +144,10 @@
         </div>
         <div id="second_content_main">
             <input style="opacity: 0 " autofocus id="inputCardRfid" type="text">
-            <button onclick="ToYellowPage()">OK</button>
+            <button onclick="ToYellowPage()">YELLOW PAGE</button>
             <input id="userIdInput" type="text" placeholder="ID do usuário">
             <input id="bookIdInput" type="text" placeholder="ID do livro">
-            <button id="saveButton">Salvar</button>
-
+            <button id="saveButton">savebutton</button>
         </div>
     </section>
     <section id="yellowPage" class="yellowBackground" style="display: none">
@@ -166,32 +165,18 @@
 <footer><p class="titleFooter">Todos os direitos reservados 2023© Arandu™ </p></footer>
 </body>
 <script src="main.js"></script>
+<script src="file:///C:/Users/Isadora/IdeaProjects/Curumim/src/main.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Comunicação com o Biblivre</title>
+    <button id="openBiblivreButton">teste</button>
 </head>
 <body>
-<button id="openBiblivreButton">Abrir Biblivre</button>
 
 
 <script>
-    document.querySelector('#input').addEventListener('keydown', async () => {
 
-        if (event.key === 'Enter'){
-            const idCard = document.querySelector('#input').value;
-            const response = await fetch('http://localhost:3000/open-biblivre', {
-                method: 'GET'
-            });
-
-            if (response.ok) {
-                console.log('Biblivre aberto com sucesso!');
-            } else {
-                console.error('Erro ao abrir o Biblivre.');
-            }
-        }
-        console.log(event.key);
-    });
 </script>
 </body>
 </html>
