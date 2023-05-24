@@ -7,14 +7,22 @@
 <body>
 <div id="yellowPage" class="yellowBackground">
     <div class="titleContent">
-        <div><h1>Olá, [nome do usuário]! </h1></div>
+        <div><h1 id="titleWithUsername">Olá,  </h1></div>
         <div style="margin-top: 1%;"><h1>O QUE DESEJA FAZER?</h1></div>
     </div>
     <div class="buttonContent">
-        <button class="buttonLendBook">Emprestar livro</button>
-        <button class="buttonReturnBook">Devolver livro</button>
+        <button onclick="toBluePageLend()" class="buttonLendBook">Emprestar livro</button>
+        <button onclick="toBluePageReturn()" class="buttonReturnBook">Devolver livro</button>
     </div>
 </div>
 <footer><p class="titleFooter">Todos os direitos reservados 2023© Arandu™ </p></footer>
 </body>
+<script>
+    function toBluePageLend() {
+        window.location.href = '/bluePageLend';
+    }
+    function toBluePageReturn() {
+        window.location.href = '/bluePageReturn';
+    }
+</script>
 </html>

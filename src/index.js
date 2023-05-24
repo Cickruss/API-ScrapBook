@@ -10,7 +10,7 @@ const app = express();
 });*/
 
 app.get('/', (req, res) =>{
-    res.sendFile(__dirname + '/redPageredPage.html');
+    res.sendFile(__dirname + '/redPage.html');
 })
 app.get('/open-biblivre', async (req, res) => {
     try {
@@ -53,7 +53,7 @@ function initBrowser() {
       }
   });
 }*/
-
+/*
 async function  Login(page) {
     await page.type('[name="username"]', 'admin');
     await page.type('[name="password"]', 'abracadabra');
@@ -91,7 +91,7 @@ async function InputNameFromCard(page, idCard) {
    // await page.type(inputUser, String(idCard));
     await page.keyboard.press('Enter');
 }
-
+*/
 async function InputBookFromRfid(page, bookRegistration) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
     await page.type(inputBook, bookRegistration);
