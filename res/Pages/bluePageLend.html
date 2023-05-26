@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Tela de Emprestimo</h1>
+    <input id="idBookInput" type="text" placeholder="ID do livro">
+</body>
+<script>
+    document.getElementById('idBookInput').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const idBook = event.target.value;
+            sendIdBook(idBook);
+            toBluePageInfo();
+        }
+    });
+
+    function toBluePageInfo(){
+        window.location.href = '/bluePageInfo'
+    }
+    function sendIdBook(idBook) {
+        fetch('/bluePageLend', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ idBookInput: idBook })
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Resposta do servidor:', data);
+            })
+            .catch(error => {
+                console.error('Erro ao enviar o valor:', error);
+            });
+    }
+</script>
+</html>
