@@ -13,12 +13,14 @@
         if (event.key === 'Enter') {
             const idBook = event.target.value;
             sendIdBook(idBook);
-            toBluePageInfo();
+            event.target.value = null
+            toBluePageInfoLend();
+
         }
     });
 
-    function toBluePageInfo(){
-        window.location.href = '/bluePageInfo'
+    function toBluePageInfoLend(){
+        window.location.href = '/bluePageInfoLend'
     }
     function sendIdBook(idBook) {
         fetch('/bluePageLend', {

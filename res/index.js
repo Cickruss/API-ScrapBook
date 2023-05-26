@@ -1,17 +1,16 @@
+//import cheerio from "cheerio";
+
 const express = require('express');
 const puppeteer = require('puppeteer');
-const cheerio = require('cheerio');
 const app = express();
-const fs = require('fs');
 const bodyParser = require('body-parser');
 
-let page;
-
-let idCard, username, idBook, bookTitle, bookAuthor;
+let page, browser;
+let idCard, username, idBook, bookTitle, bookAuthor, returnDate;
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-app.get('/', (req, res) =>{
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/Pages/redPage.html');
 })
 app.post('/', (req, res) => {
@@ -23,7 +22,7 @@ app.post('/', (req, res) => {
 app.get('/yellowPage', async (req, res) => {
     console.log('Id card Passou para o programa global: \n' + idCard);
     try {
-        const browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
+        browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
         const context = await browser.createIncognitoBrowserContext();
         page = await context.newPage();
         await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
@@ -46,19 +45,31 @@ app.get('/yellowPage', async (req, res) => {
 app.get('/bluePageLend', async (req, res) => {
     res.sendFile(__dirname + '/Pages/bluePageLend.html');
 });
-app.post('/bluePageLend', (req, res) => {
+app.post('/bluePageReturn', (req, res) => {
     idBook = req.body.idBookInput;
+
     console.log('Valor do input:', idBook);
     return idBook;
 });
-app.get('/bluePageInfo', async (req, res) => {
+app.get('/bluePageReturn', async (req, res) => {
+    res.sendFile(__dirname + '/Pages/bluePageReturn.html');
+});
+app.post('/bluePageLend', (req, res) => {
+    idBook = req.body.idBookInput;
+
+    console.log('Valor do input:', idBook);
+    return idBook;
+});
+app.get('/bluePageInfoLend', async (req, res) => {
     console.log('Entrou na tela de informações do livro');
     console.log('IdBook: ' + idBook);
     try{
          await InputBookFromRfid(page, idBook);
          bookTitle = await GetBookTitle(page);
+         bookAuthor = await GetBookAuthor(page);
          console.log(bookTitle);
-         res.sendFile(__dirname + '/Pages/bluePageInfo.html');
+         console.log(bookAuthor);
+         res.sendFile(__dirname + '/Pages/bluePageInfoLend.html');
     }catch (error) {
         console.error(error);
         res.sendStatus(500);
@@ -66,8 +77,40 @@ app.get('/bluePageInfo', async (req, res) => {
 
 
 });
-app.get('/greenPage', (req, res) => {
-    res.sendFile(__dirname + '/Pages/greenPage.html');
+app.post('/bluePageReturn', (req, res) => {
+    idBook = req.body.idBookInput;
+
+    console.log('Valor do input:', idBook);
+    return idBook;
+});
+app.get('/bluePageInfoReturn', async (req, res) => {
+    console.log('Entrou na tela de informações do livro');
+    console.log('IdBook: ' + idBook);
+    try{
+        await InputBookFromRfid(page, idBook);
+        bookTitle = await GetBookTitle(page);
+        console.log(bookTitle);
+        res.sendFile(__dirname + '/Pages/bluePageInfoReturn.html');
+    }catch (error) {
+        console.error(error);
+        res.sendStatus(500);
+    }
+
+
+});
+app.get('/greenPageLend', async (req, res) => {
+    await ClickLendingButton(page)
+    returnDate = await GetReturnDate(page);
+    console.log(returnDate);
+    await page.close();
+    await browser.close();
+    res.sendFile(__dirname + '/Pages/greenPageLend.html');
+})
+app.get('/greenPageReturn', async (req, res) => {
+    await ClickGiveBack(page);
+    await page.close();
+    await browser.close();
+    res.sendFile(__dirname + '/Pages/greenPageReturn.html');
 })
 
 app.listen(8081, () => {
@@ -115,7 +158,6 @@ async function InputNameFromCard(page, idCard) {
 }
 async function GetUserName(page) {
     await page.waitForSelector('div.record');
-
     let username = await page.evaluate(() => {
         const recordDiv = document.querySelector('div.record');
         const nameLabel = recordDiv.querySelector('label');
@@ -133,7 +175,6 @@ async function GetUserName(page) {
         return username;
     }
 }
-
 async function InputBookFromRfid(page, idBook) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
     await page.type(inputBook, '');
@@ -142,7 +183,9 @@ async function InputBookFromRfid(page, idBook) {
     await page.keyboard.press('Enter');
 }
 async function GetBookTitle(page) {
-    await page.waitForSelector('#holding_search div.record');// TIMEOUT QUANDO APERTA O BOTÃO CANCELAR
+
+    //await page.waitForSelector('#holding_search div.record');
+    await page.waitForTimeout(1000);
     let bookTitle = await page.evaluate(() => {
         const holdingSearchDiv = document.querySelector('#holding_search');
         const recordDiv = holdingSearchDiv.querySelector('div.record');
@@ -158,4 +201,56 @@ async function GetBookTitle(page) {
     bookTitle = bookTitle.substring(2);
     console.log("Titulo: " + bookTitle)
     return bookTitle;
+}
+async function GetBookAuthor(page) {
+
+    await page.waitForTimeout(1000);
+    let bookAuthor = await page.evaluate(() => {
+        const holdingSearchDiv = document.querySelector('#holding_search');
+        const recordDiv = holdingSearchDiv.querySelector('div.record');
+        const authorLabel = recordDiv.querySelector('label:nth-of-type(2)');
+        const authorText = authorLabel.nextSibling.textContent.trim();
+
+        return authorText;
+    });
+    bookAuthor = bookAuthor.substring(2);
+    console.log("Autor: "+bookAuthor);
+    return bookAuthor;
+}
+async function GetReturnDate(page) {
+    await page.waitForSelector('.result.user_lending');
+    let returnDate = await page.evaluate(() => {
+        const lendingDiv = document.querySelector('.result.user_lending');
+        const lendingDateLabel = Array.from(lendingDiv.querySelectorAll('label')).find(label => label.textContent.trim() === 'Data prevista para devolução');
+        if (lendingDateLabel) {
+            const returnDateText = lendingDateLabel.nextSibling.textContent.trim();
+            return returnDateText;
+        }
+        return null;
+    });
+    returnDate = returnDate.substring(2);
+    console.log("Data de devolução: "+returnDate);
+    return returnDate;
+}
+
+async function ClickLendingButton(page) {
+    await page.waitForTimeout(500);
+    await page.evaluate(() => {
+        const buttons = document.querySelectorAll('a.button.center');
+        for (const button of buttons) {
+            if (button.textContent.trim() === 'Emprestar') {
+                button.click();
+                break;
+            }
+        }
+    });
+}
+async function ClickGiveBack(page) {
+    await page.waitForTimeout(500);
+    await page.evaluate(() => {
+        const devolverButton = document.querySelector('div.buttons a[onclick^="HoldingSearch.returnLending"]');
+        if (devolverButton) {
+            devolverButton.click();
+        }
+    });
 }
