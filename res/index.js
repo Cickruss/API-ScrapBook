@@ -4,6 +4,9 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const app = express();
 const bodyParser = require('body-parser');
+const fs = require('fs');
+// Escreve o HTML modificado em um novo arquivo
+//fs.writeFileSync('caminho/para/o/novo-arquivo.html', htmlModificado);
 
 let page, browser;
 let idCard, username, idBook, bookTitle, bookAuthor, returnDate;
@@ -177,7 +180,9 @@ async function GetUserName(page) {
 }
 async function InputBookFromRfid(page, idBook) {
     const inputBook = '[placeholder="Tombo patrimonial"]';
-    await page.type(inputBook, '');
+    await page.$eval(inputBook, (element) => {
+        element.value = '';
+    });
     await page.type(inputBook, idBook);
     await page.focus(inputBook);
     await page.keyboard.press('Enter');
@@ -254,3 +259,24 @@ async function ClickGiveBack(page) {
         }
     });
 }
+
+
+function ReturnNameHtml(username){
+// Lê o arquivo HTML
+    const html = fs.readFileSync('/yellowpage.html', 'utf-8');
+
+// Carrega o HTML no Cheerio
+    const $ = cheerio.load(html);
+
+// Obtém o nome do usuário (armazenado em uma variável chamada 'nomeUsuario')
+    const usernameChangeHtml = username
+
+// Seleciona o elemento <h1> pelo ID e altera o texto
+    $('#titleWithUsername').text(`Olá, ${usernameChangeHtml}`);
+
+// Obtém o HTML modificado
+    const ModifiedHTML = $.html();
+
+    return ModifiedHTML;
+}
+
