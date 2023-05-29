@@ -7,8 +7,12 @@
 <body>
     <h1>Tela de Devolução</h1>
     <input id="idBookInput" type="text" placeholder="ID do livro">
+    <button onclick="toYellowPage()" id="giveBack">Voltar</button>
 </body>
 <script>
+    function toYellowPage(){
+        window.location.href = 'yellowPage';
+    }
     document.getElementById('idBookInput').addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             const idBook = event.target.value;

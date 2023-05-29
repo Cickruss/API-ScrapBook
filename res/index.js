@@ -25,7 +25,7 @@ app.post('/', (req, res) => {
 app.get('/yellowPage', async (req, res) => {
     console.log('Id card Passou para o programa global: \n' + idCard);
     try {
-        browser = await puppeteer.launch({ args: ["--incognito"], headless: false });
+        browser = await puppeteer.launch({ args: ["--incognito"], headless: true });
         const context = await browser.createIncognitoBrowserContext();
         page = await context.newPage();
         await page.evaluateOnNewDocument(() => { delete navigator.webdriver; });
@@ -37,9 +37,8 @@ app.get('/yellowPage', async (req, res) => {
         await page.waitForNavigation();
         username = await InputNameFromCard(page, idCard);
         console.log("Username Retornado ao servidor: "+ username);
-
-
         res.sendFile(__dirname + '/Pages/yellowPage.html');
+
     } catch (error) {
         console.error(error);
         res.sendStatus(500);
@@ -71,7 +70,7 @@ app.get('/bluePageInfoLend', async (req, res) => {
          bookTitle = await GetBookTitle(page);
          bookAuthor = await GetBookAuthor(page);
          console.log(bookTitle);
-         console.log(bookAuthor);
+         console.log(bookAuthor)
          res.sendFile(__dirname + '/Pages/bluePageInfoLend.html');
     }catch (error) {
         console.error(error);
@@ -114,6 +113,20 @@ app.get('/greenPageReturn', async (req, res) => {
     await page.close();
     await browser.close();
     res.sendFile(__dirname + '/Pages/greenPageReturn.html');
+})
+
+
+app.get('/username', async (req, res) => {
+    res.send(username);
+});
+app.get('/bookTitle', (req, res) => {
+    res.send(bookTitle)
+})
+app.get('/bookAuthor', (req, res) => {
+    res.send(bookAuthor)
+})
+app.get('/returnDate', (req, res) => {
+    res.send(returnDate)
 })
 
 app.listen(8081, () => {
@@ -258,25 +271,5 @@ async function ClickGiveBack(page) {
             devolverButton.click();
         }
     });
-}
-
-
-function ReturnNameHtml(username){
-// Lê o arquivo HTML
-    const html = fs.readFileSync('/yellowpage.html', 'utf-8');
-
-// Carrega o HTML no Cheerio
-    const $ = cheerio.load(html);
-
-// Obtém o nome do usuário (armazenado em uma variável chamada 'nomeUsuario')
-    const usernameChangeHtml = username
-
-// Seleciona o elemento <h1> pelo ID e altera o texto
-    $('#titleWithUsername').text(`Olá, ${usernameChangeHtml}`);
-
-// Obtém o HTML modificado
-    const ModifiedHTML = $.html();
-
-    return ModifiedHTML;
 }
 

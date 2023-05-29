@@ -6,6 +6,9 @@
 </head>
 <body>
     <h1> Emprestimo concluido</h1>
+    <h3 id="bookTitle"></h3>
+    <h4 id="bookAuthor"></h4>
+    <h5 id="returnDate"></h5>
     <button onclick="toYellowPage()">CONTINUAR</button>
     <button onclick="toRedPage()">FINALIZAR SESSÃO</button>
 </body>
@@ -16,5 +19,23 @@
     function toYellowPage(){
         window.location.href = 'yellowPage';
     }
+    fetch('/bookTitle')
+        .then(response => response.text())
+        .then(data => {
+            const titleWithUsername = document.getElementById('bookTitle');
+            titleWithUsername.textContent = `Titulo: ${data}`;
+        });
+    fetch('/bookAuthor')
+        .then(response => response.text())
+        .then(data => {
+            const titleWithUsername = document.getElementById('bookAuthor');
+            titleWithUsername.textContent = `Autor: ${data}`;
+        });
+    fetch('/returnDate')
+        .then(response => response.text())
+        .then(data => {
+            const titleWithUsername = document.getElementById('returnDate');
+            titleWithUsername.textContent = `Data de devolução: ${data}`;
+        });
 </script>
 </html>

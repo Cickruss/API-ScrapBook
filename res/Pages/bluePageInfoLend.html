@@ -6,6 +6,8 @@
 </head>
 <body>
     <h1>Tela de Infomações do livro</h1>
+    <h3 id="bookTitle"></h3>
+    <h4 id="bookAuthor"></h4>
     <button onclick="toGreenPage()">Emprestar</button>
     <button onclick="toBluePageLend()">Cancelar</button>
 </body>
@@ -16,5 +18,17 @@
     function toGreenPage() {
         window.location.href = '/greenPageLend';
     }
+    fetch('/bookTitle')
+        .then(response => response.text())
+        .then(data => {
+            const titleWithUsername = document.getElementById('bookTitle');
+            titleWithUsername.textContent = `Titulo: ${data}`;
+        });
+    fetch('/bookAuthor')
+        .then(response => response.text())
+        .then(data => {
+            const titleWithUsername = document.getElementById('bookAuthor');
+            titleWithUsername.textContent = `Autor: ${data}`;
+        });
 </script>
 </html>
