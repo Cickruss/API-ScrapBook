@@ -105,7 +105,8 @@ app.get('/greenPageLend', async (req, res) => {
     returnDate = await GetReturnDate(page);
     console.log(returnDate);
     await page.close();
-    await browser.close();
+    await browser.close()
+
     res.sendFile(__dirname + '/Pages/greenPageLend.html');
 })
 app.get('/greenPageReturn', async (req, res) => {

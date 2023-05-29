@@ -24,5 +24,12 @@
     function toBluePageReturn() {
         window.location.href = '/bluePageReturn';
     }
+
+    fetch('/username')
+        .then(response => response.text())
+        .then(data => {
+            const titleWithUsername = document.getElementById('titleWithUsername');
+            titleWithUsername.textContent = `Olá, ${data}`;
+        });
 </script>
 </html>
