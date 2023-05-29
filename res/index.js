@@ -1,12 +1,7 @@
-//import cheerio from "cheerio";
-
 const express = require('express');
 const puppeteer = require('puppeteer');
 const app = express();
 const bodyParser = require('body-parser');
-const fs = require('fs');
-// Escreve o HTML modificado em um novo arquivo
-//fs.writeFileSync('caminho/para/o/novo-arquivo.html', htmlModificado);
 
 let page, browser;
 let idCard, username, idBook, bookTitle, bookAuthor, returnDate;
@@ -129,11 +124,9 @@ app.get('/bookAuthor', (req, res) => {
 app.get('/returnDate', (req, res) => {
     res.send(returnDate)
 })
-
 app.listen(8081, () => {
     console.log('Server on!');
 });
-
 async function  Login(page) {
     await page.type('[name="username"]', 'admin');
     await page.type('[name="password"]', 'abracadabra');
