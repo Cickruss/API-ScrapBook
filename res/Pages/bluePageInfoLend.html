@@ -1,15 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="img/Logo%20Curumim.png"/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Curumim</title>
 </head>
-<body>
-    <h1>Tela de Infomações do livro</h1>
-    <h3 id="bookTitle"></h3>
-    <h4 id="bookAuthor"></h4>
-    <button onclick="toGreenPage()">Emprestar</button>
-    <button onclick="toBluePageLend()">Cancelar</button>
+<body class="blueBackground">
+<header>
+    <svg class="logoImageHeader" xmlns="http://www.w3.org/2000/svg"
+         zoomAndPan="magnify" viewBox="0 0 1440 809.999993" preserveAspectRatio="xMidYMid meet" version="1.0">
+        <defs>
+            <g />
+            <clipPath id="210565146b">
+                <path
+                        d="M 33.1875 181.621094 L 479.945312 181.621094 L 479.945312 628.378906 L 33.1875 628.378906 Z M 33.1875 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+            <clipPath id="b20cc161b1">
+                <path
+                        d="M 256.566406 181.621094 C 133.195312 181.621094 33.1875 281.632812 33.1875 405 C 33.1875 528.367188 133.195312 628.378906 256.566406 628.378906 C 379.933594 628.378906 479.945312 528.367188 479.945312 405 C 479.945312 281.632812 379.933594 181.621094 256.566406 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+            <clipPath id="4b25483f5c">
+                <path
+                        d="M 306.3125 181.621094 L 753.070312 181.621094 L 753.070312 628.378906 L 306.3125 628.378906 Z M 306.3125 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+            <clipPath id="5aa005a8c8">
+                <path
+                        d="M 529.691406 181.621094 C 406.324219 181.621094 306.3125 281.632812 306.3125 405 C 306.3125 528.367188 406.324219 628.378906 529.691406 628.378906 C 653.0625 628.378906 753.070312 528.367188 753.070312 405 C 753.070312 281.632812 653.0625 181.621094 529.691406 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+            <clipPath id="04a8bc2a78">
+                <path
+                        d="M 645.207031 181.621094 L 1091.964844 181.621094 L 1091.964844 628.378906 L 645.207031 628.378906 Z M 645.207031 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+            <clipPath id="9381274c8f">
+                <path
+                        d="M 868.585938 181.621094 C 745.214844 181.621094 645.207031 281.632812 645.207031 405 C 645.207031 528.367188 745.214844 628.378906 868.585938 628.378906 C 991.953125 628.378906 1091.964844 528.367188 1091.964844 405 C 1091.964844 281.632812 991.953125 181.621094 868.585938 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+            <clipPath id="112031e435">
+                <path
+                        d="M 950.691406 181.621094 L 1397.453125 181.621094 L 1397.453125 628.378906 L 950.691406 628.378906 Z M 950.691406 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+            <clipPath id="08a72f0914">
+                <path
+                        d="M 1174.070312 181.621094 C 1050.703125 181.621094 950.691406 281.632812 950.691406 405 C 950.691406 528.367188 1050.703125 628.378906 1174.070312 628.378906 C 1297.441406 628.378906 1397.453125 528.367188 1397.453125 405 C 1397.453125 281.632812 1297.441406 181.621094 1174.070312 181.621094 "
+                        clip-rule="nonzero" />
+            </clipPath>
+        </defs>
+        <g clip-path="url(#210565146b)">
+            <g clip-path="url(#b20cc161b1)">
+                <path fill="#df4041"
+                      d="M 33.1875 181.621094 L 479.945312 181.621094 L 479.945312 628.378906 L 33.1875 628.378906 Z M 33.1875 181.621094 "
+                      fill-opacity="1" fill-rule="nonzero" />
+            </g>
+        </g>
+        <g clip-path="url(#4b25483f5c)">
+            <g clip-path="url(#5aa005a8c8)">
+                <path fill="#facf32"
+                      d="M 306.3125 181.621094 L 753.070312 181.621094 L 753.070312 628.378906 L 306.3125 628.378906 Z M 306.3125 181.621094 "
+                      fill-opacity="1" fill-rule="nonzero" />
+            </g>
+        </g>
+        <g clip-path="url(#04a8bc2a78)">
+            <g clip-path="url(#9381274c8f)">
+                <path fill="#346bc8"
+                      d="M 645.207031 181.621094 L 1091.964844 181.621094 L 1091.964844 628.378906 L 645.207031 628.378906 Z M 645.207031 181.621094 "
+                      fill-opacity="1" fill-rule="nonzero" />
+            </g>
+        </g>
+        <g clip-path="url(#112031e435)">
+            <g clip-path="url(#08a72f0914)">
+                <path fill="#369448"
+                      d="M 950.691406 181.621094 L 1397.453125 181.621094 L 1397.453125 628.378906 L 950.691406 628.378906 Z M 950.691406 181.621094 "
+                      fill-opacity="1" fill-rule="nonzero" />
+            </g>
+        </g>
+        <g fill="#ffffff" fill-opacity="1">
+            <g transform="translate(151.247952, 504.57059)">
+                <g>
+                    <path
+                            d="M 127.390625 -219.40625 L 215.953125 0 L 162.234375 0 L 146.015625 -43.875 L 62.5 -43.875 L 46.28125 0 L -7.453125 0 L 81.109375 -219.40625 Z M 128.984375 -87.765625 L 104.515625 -151.59375 L 103.984375 -151.59375 L 79.515625 -87.765625 Z M 128.984375 -87.765625 " />
+                </g>
+            </g>
+        </g>
+        <g fill="#ffffff" fill-opacity="1">
+            <g transform="translate(343.004019, 504.57059)">
+                <g>
+                    <path
+                            d="M 15.953125 -219.40625 L 94.40625 -219.40625 C 115.507812 -219.40625 132.707031 -213.773438 146 -202.515625 C 159.300781 -191.265625 165.953125 -175.175781 165.953125 -154.25 C 165.953125 -138.113281 161.914062 -124.59375 153.84375 -113.6875 C 145.78125 -102.789062 134.835938 -95.125 121.015625 -90.6875 L 196.546875 0 L 132.96875 0 L 65.953125 -86.703125 L 65.953125 0 L 15.953125 0 Z M 65.953125 -122.078125 L 71.8125 -122.078125 C 76.414062 -122.078125 80.3125 -122.164062 83.5 -122.34375 C 86.695312 -122.519531 90.332031 -123.140625 94.40625 -124.203125 C 98.488281 -125.265625 101.769531 -126.769531 104.25 -128.71875 C 106.738281 -130.664062 108.867188 -133.5 110.640625 -137.21875 C 112.410156 -140.945312 113.296875 -145.472656 113.296875 -150.796875 C 113.296875 -156.117188 112.410156 -160.640625 110.640625 -164.359375 C 108.867188 -168.078125 106.738281 -170.910156 104.25 -172.859375 C 101.769531 -174.816406 98.488281 -176.328125 94.40625 -177.390625 C 90.332031 -178.453125 86.695312 -179.070312 83.5 -179.25 C 80.3125 -179.425781 76.414062 -179.515625 71.8125 -179.515625 L 65.953125 -179.515625 Z M 65.953125 -122.078125 " />
+                </g>
+            </g>
+        </g>
+        <g fill="#ffffff" fill-opacity="1">
+            <g transform="translate(516.674914, 504.57059)">
+                <g>
+                    <path
+                            d="M 127.390625 -219.40625 L 215.953125 0 L 162.234375 0 L 146.015625 -43.875 L 62.5 -43.875 L 46.28125 0 L -7.453125 0 L 81.109375 -219.40625 Z M 128.984375 -87.765625 L 104.515625 -151.59375 L 103.984375 -151.59375 L 79.515625 -87.765625 Z M 128.984375 -87.765625 " />
+                </g>
+            </g>
+        </g>
+        <g fill="#ffffff" fill-opacity="1">
+            <g transform="translate(708.43098, 504.57059)">
+                <g>
+                    <path
+                            d="M 65.953125 -136.171875 L 65.953125 0 L 15.953125 0 L 15.953125 -219.40625 L 65.953125 -219.40625 L 153.1875 -83.25 L 153.71875 -83.25 L 153.71875 -219.40625 L 203.71875 -219.40625 L 203.71875 0 L 153.71875 0 L 66.484375 -136.171875 Z M 65.953125 -136.171875 " />
+                </g>
+            </g>
+        </g>
+        <g fill="#ffffff" fill-opacity="1">
+            <g transform="translate(911.357323, 504.57059)">
+                <g>
+                    <path
+                            d="M 15.953125 -219.40625 L 79.515625 -219.40625 C 110.015625 -219.40625 136.078125 -208.988281 157.703125 -188.15625 C 179.335938 -167.320312 190.15625 -141.21875 190.15625 -109.84375 C 190.15625 -78.28125 179.382812 -52.082031 157.84375 -31.25 C 136.300781 -10.414062 110.191406 0 79.515625 0 L 15.953125 0 Z M 65.953125 -44.6875 L 73.671875 -44.6875 C 91.929688 -44.6875 106.867188 -50.84375 118.484375 -63.15625 C 130.097656 -75.476562 135.992188 -90.953125 136.171875 -109.578125 C 136.171875 -128.191406 130.363281 -143.703125 118.75 -156.109375 C 107.132812 -168.523438 92.109375 -174.734375 73.671875 -174.734375 L 65.953125 -174.734375 Z M 65.953125 -44.6875 " />
+                </g>
+            </g>
+        </g>
+        <g fill="#ffffff" fill-opacity="1">
+            <g transform="translate(1090.879315, 504.57059)">
+                <g>
+                    <path
+                            d="M 184.578125 -219.40625 L 184.578125 -77.921875 C 184.578125 -50.972656 177.304688 -30.582031 162.765625 -16.75 C 148.222656 -2.925781 126.941406 3.984375 98.921875 3.984375 C 70.910156 3.984375 49.632812 -2.925781 35.09375 -16.75 C 20.5625 -30.582031 13.296875 -50.972656 13.296875 -77.921875 L 13.296875 -219.40625 L 63.296875 -219.40625 L 63.296875 -92.546875 C 63.296875 -74.816406 66.085938 -62.492188 71.671875 -55.578125 C 77.253906 -48.671875 86.335938 -45.21875 98.921875 -45.21875 C 111.515625 -45.21875 120.601562 -48.671875 126.1875 -55.578125 C 131.78125 -62.492188 134.578125 -74.816406 134.578125 -92.546875 L 134.578125 -219.40625 Z M 184.578125 -219.40625 " />
+                </g>
+            </g>
+        </g>
+    </svg>
+</header>
+<main>
+    <section class="flexCenterColumn font mainContent">
+        <h1 >INFORMAÇÕES DO LIVRO</h1>
+        <div class="flexCenterRow">
+            <div class="flexCenterColumn  infoContent">
+            <h3 class="infoLabelTitle">Titulo:</h3><label class="infoLabel" id="bookTitle"></label>
+            <h4 class="infoLabelTitle">Autor:</h4><label class="infoLabel" id="bookAuthor"></label>
+            </div>
+            <div>
+                <svg class="book" viewBox="0 0 854 854" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_195_12)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M502.152 133.224L767.034 267.053C778.228 272.748 787.073 282.184 792.033 293.723C796.993 305.261 797.754 318.172 794.184 330.213C780.307 377.575 781.837 397.466 790.911 419.919C800.056 442.621 793.722 471.479 770.023 486.46L404.084 718.107C388.748 727.822 369.213 729.316 352.239 721.025L215.599 653.595L158.524 624.95L117.959 604.241L93.1928 591.253L80.3828 584.278L71.0955 578.941C34.8005 557.057 23.485 512.578 23.6985 478.596C23.8408 444.044 35.7257 400.882 68.7114 377.183L79.3864 369.818L109.917 349.855L182.685 303.384L449.844 135.608C457.626 130.753 466.528 127.985 475.69 127.574C484.853 127.163 493.967 129.085 502.152 133.224ZM712.841 380.315L404.227 575.667L400.384 577.909L396.434 579.759C392.52 594.277 391.168 604.703 391.31 614.382C391.381 620.146 392.022 626.053 393.267 632.779L394.761 639.788L720.278 433.761L717.716 424.901C714.689 413.322 713.041 401.425 712.805 389.46L712.841 380.315ZM99.6333 451.126C96.4209 460.024 94.8067 469.42 94.8652 478.881C94.7584 502.793 103.298 515.282 107.853 518.022L118.813 524.249L141.088 536.099L204.07 568.23L320.606 626.267C320.321 622.679 320.155 619.083 320.108 615.485C319.977 602.174 321.338 588.889 324.164 575.881L326.548 565.633L99.6333 451.126ZM496.886 246.023C488.84 241.78 479.475 240.779 470.714 243.225C461.953 245.672 454.462 251.381 449.779 259.179C445.097 266.977 443.578 276.273 445.536 285.156C447.494 294.039 452.779 301.835 460.306 306.942L463.864 309.077L538.589 348.219C546.635 352.462 556 353.463 564.761 351.016C573.522 348.57 581.013 342.861 585.696 335.063C590.378 327.264 591.897 317.969 589.939 309.086C587.981 300.203 582.696 292.407 575.169 287.3L571.611 285.165L496.886 246.023Z" fill="white"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_195_12">
+                            <rect width="854" height="854" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+        <div class="buttonContent flexCenterRow">
+            <button class="button font" onclick="toGreenPage()">Emprestar</button>
+            <button class="button font buttonCancel" onclick="toBluePageLend()">Cancelar</button>
+        </div>
+    </section>
+</main>
+<footer><p class="titleFooter">Todos os direitos reservados 2023© Arandu™ </p></footer>
 </body>
 <script>
     function toBluePageLend() {
@@ -22,13 +171,108 @@
         .then(response => response.text())
         .then(data => {
             const titleWithUsername = document.getElementById('bookTitle');
-            titleWithUsername.textContent = `Titulo: ${data}`;
+            titleWithUsername.textContent = ` ${data}`;
         });
     fetch('/bookAuthor')
         .then(response => response.text())
         .then(data => {
             const titleWithUsername = document.getElementById('bookAuthor');
-            titleWithUsername.textContent = `Autor: ${data}`;
+            titleWithUsername.textContent = ` ${data}`;
         });
 </script>
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        font-family: Montserrat, serif;
+    }
+    .blueBackground{
+        background: #346BC8;
+    }
+
+    /*Header*/
+
+    header{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+    }
+    .logoImageHeader{
+        width: 10%;
+    }
+
+    /* --------------------- */
+
+    /* Main */
+    .font{
+        font-family: Montserrat, serif;
+        color: white;
+    }
+    .flexCenterColumn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .flexCenterRow{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .mainContent{
+        height: 76vh;
+        justify-content: space-between;
+    }
+    .infoLabelTitle{
+        font-size: 250%;
+        color: #ffffff;
+    }
+    .infoLabel{
+        font-size: 180%;
+        color: white;
+    }
+    .infoContent{
+        width: 20em;
+        gap: 1.5em;
+        align-items: flex-start;
+    }
+    .book{
+        width: 120%;
+    }
+    .buttonContent{
+        gap: 10%;
+    }
+    .button{
+        width: 15em;
+        height: 3em;
+        border: 1.5px solid white;
+        background-color: #346BC8;
+        color: white;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 150%;
+        font-weight: bold;
+    }
+    .button:hover{
+        color: #369448;
+        background-color: white;
+    }
+    .buttonCancel:hover{
+        color: #DF4041;
+    }
+    .titleFooter {
+        color: #ffffff;
+        font-size: 80%;
+        bottom: 2%;
+        position: fixed;
+        width: 98%;
+        text-align: right;
+    }
+
+</style>
 </html>
