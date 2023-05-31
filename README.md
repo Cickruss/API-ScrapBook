@@ -213,7 +213,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [![Instagram][Instagram.js]][Instagram-url] 
 
 ##### Fundadores
-* Ícaro Macedo - [icaro.o.macedo@gmail](mailto:icaro.o.macedo@gmail.com)
+* Ícaro Macedo - [icaro.o.macedo@gmail.com](mailto:icaro.o.macedo@gmail.com)
 * Bruna Melido - [melidobru@gmail.com](mailto:melidobru@gmail.com)
 * Isadora Lacerda - [isadora.oliveira@icloud.com](mailto:isadora.oliveira@icloud.com)
 
