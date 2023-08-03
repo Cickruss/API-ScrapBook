@@ -9,7 +9,7 @@ let idCard, username, idBook, bookTitle, bookAuthor, returnDate;
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/res/Pages/redPage.html');
+    res.sendFile(__dirname + '/index.html');
 })
 app.post('/', (req, res) => {
     idCard = req.body.idCardInput;
